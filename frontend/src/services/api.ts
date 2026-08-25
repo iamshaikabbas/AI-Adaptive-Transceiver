@@ -27,7 +27,9 @@ import type {
  *   Example:
  *   https://ai-adaptive-transceiver-1.onrender.com
  */
-const BASE = import.meta.env.VITE_API_BASE_URL || "";
+const BASE =
+  import.meta.env.VITE_API_BASE_URL ||
+  "https://ai-adaptive-transceiver-1.onrender.com";
 
 async function get<T>(path: string): Promise<T> {
   const res = await fetch(`${BASE}${path}`);
