@@ -1,0 +1,380 @@
+[
+  {
+    "graph_id": 1,
+    "title": "Overall ACS by Strategy",
+    "filename": "01_overall_acs.png",
+    "category": "01_system_overview",
+    "data_source": "final_dataset.csv",
+    "description": "Mean ACS across all scenarios and frames for each strategy.",
+    "interpretation": "Oracle achieves highest ACS (0.444). AI Adaptive (0.434) closely matches Fixed OTFS (0.435) and exceeds Fixed ODDM (0.390)."
+  },
+  {
+    "graph_id": 2,
+    "title": "Overall BER by Strategy",
+    "filename": "01_overall_ber.png",
+    "category": "01_system_overview",
+    "data_source": "final_dataset.csv",
+    "description": "Mean BER across all scenarios and frames for each strategy.",
+    "interpretation": "Oracle (0.063) < Fixed OTFS (0.064) ≈ AI Adaptive (0.065) < Fixed ODDM (0.084). AI Adaptive BER close to best fixed strategy."
+  },
+  {
+    "graph_id": 3,
+    "title": "Overall Throughput by Strategy",
+    "filename": "01_overall_throughput.png",
+    "category": "01_system_overview",
+    "data_source": "final_dataset.csv",
+    "description": "Mean throughput in kbps across all scenarios and frames.",
+    "interpretation": "Oracle (272 kbps) > AI Adaptive (263 kbps) > Fixed OTFS (260 kbps) > Fixed ODDM (242 kbps)."
+  },
+  {
+    "graph_id": 4,
+    "title": "Overall CQI by Strategy",
+    "filename": "01_overall_cqi.png",
+    "category": "01_system_overview",
+    "data_source": "final_dataset.csv",
+    "description": "Mean CQI across all scenarios and frames.",
+    "interpretation": "All strategies show similar CQI (10-10.3), indicating the channel quality is a property of the scenario, not the strategy."
+  },
+  {
+    "graph_id": 5,
+    "title": "Overall Spectral Efficiency by Strategy",
+    "filename": "01_overall_se.png",
+    "category": "01_system_overview",
+    "data_source": "final_dataset.csv",
+    "description": "Mean spectral efficiency for each strategy.",
+    "interpretation": "Oracle leads; AI Adaptive and Fixed OTFS comparable; Fixed ODDM lower."
+  },
+  {
+    "graph_id": 6,
+    "title": "Detector Execution Time by Strategy",
+    "filename": "01_overall_detector_time.png",
+    "category": "01_system_overview",
+    "data_source": "final_dataset.csv",
+    "description": "Mean wall-clock detector computation time (not communication latency). Oracle runs both detectors.",
+    "interpretation": "Oracle ~2x single-detector time. AI Adaptive and Fixed strategies similar detector times (~single waveform detector)."
+  },
+  {
+    "graph_id": 7,
+    "title": "OTFS vs ODDM BER Distribution",
+    "filename": "02_wf_ber_boxplot.png",
+    "category": "02_waveform_comparison",
+    "data_source": "final_dataset.csv",
+    "description": "Boxplot of BER values for OTFS vs ODDM waveform selections.",
+    "interpretation": "OTFS shows lower median BER and tighter distribution than ODDM."
+  },
+  {
+    "graph_id": 8,
+    "title": "OTFS vs ODDM Throughput Distribution",
+    "filename": "02_wf_throughput_boxplot.png",
+    "category": "02_waveform_comparison",
+    "data_source": "final_dataset.csv",
+    "description": "Boxplot of throughput for OTFS vs ODDM selections.",
+    "interpretation": "OTFS median throughput higher than ODDM across all frames."
+  },
+  {
+    "graph_id": 9,
+    "title": "OTFS vs ODDM ACS Distribution",
+    "filename": "02_wf_acs_boxplot.png",
+    "category": "02_waveform_comparison",
+    "data_source": "final_dataset.csv",
+    "description": "Boxplot of ACS for OTFS vs ODDM selections.",
+    "interpretation": "OTFS achieves higher median ACS than ODDM."
+  },
+  {
+    "graph_id": 10,
+    "title": "OTFS vs ODDM CQI Distribution",
+    "filename": "02_wf_cqi_boxplot.png",
+    "category": "02_waveform_comparison",
+    "data_source": "final_dataset.csv",
+    "description": "Boxplot of CQI for OTFS vs ODDM selections.",
+    "interpretation": "CQI distributions similar since CQI depends on channel, not waveform."
+  },
+  {
+    "graph_id": 11,
+    "title": "Waveform Usage by AI Adaptive System",
+    "filename": "02_wf_usage_pie.png",
+    "category": "02_waveform_comparison",
+    "data_source": "final_dataset.csv",
+    "description": "Distribution of OTFS vs ODDM selections by the AI adaptive system.",
+    "interpretation": "AI selects OTFS ~70% and ODDM ~30% of frames. Distribution reflects the AI's learned policy, not a predetermined split."
+  },
+  {
+    "graph_id": 12,
+    "title": "AI Selected Waveform vs Oracle Waveform",
+    "filename": "02_wf_confusion_matrix.png",
+    "category": "02_waveform_comparison",
+    "data_source": "final_dataset.csv",
+    "description": "Confusion matrix of AI waveform selection vs oracle recommendation.",
+    "interpretation": "Diagonal = agreement. High diagonal values indicate strong AI-oracle alignment."
+  },
+  {
+    "graph_id": 13,
+    "title": "BER vs SNR by Strategy",
+    "filename": "03_ber_vs_snr.png",
+    "category": "03_snr_analysis",
+    "data_source": "final_dataset.csv",
+    "description": "Mean BER at each SNR level for all four strategies.",
+    "interpretation": "BER decreases with SNR for all strategies. AI Adaptive tracks Fixed OTFS closely across SNR range."
+  },
+  {
+    "graph_id": 14,
+    "title": "Throughput vs SNR by Strategy",
+    "filename": "03_tp_vs_snr.png",
+    "category": "03_snr_analysis",
+    "data_source": "final_dataset.csv",
+    "description": "Mean throughput at each SNR level.",
+    "interpretation": "Throughput increases with SNR. AI Adaptive tracks Fixed OTFS."
+  },
+  {
+    "graph_id": 15,
+    "title": "ACS vs SNR by Strategy",
+    "filename": "03_acs_vs_snr.png",
+    "category": "03_snr_analysis",
+    "data_source": "final_dataset.csv",
+    "description": "Mean ACS at each SNR level.",
+    "interpretation": "ACS improves with SNR. AI Adaptive close to oracle across range."
+  },
+  {
+    "graph_id": 16,
+    "title": "CQI vs SNR by Strategy",
+    "filename": "03_cqi_vs_snr.png",
+    "category": "03_snr_analysis",
+    "data_source": "final_dataset.csv",
+    "description": "Mean CQI at each SNR level.",
+    "interpretation": "CQI increases with SNR. Nearly identical across strategies."
+  },
+  {
+    "graph_id": 17,
+    "title": "Spectral Efficiency vs SNR by Strategy",
+    "filename": "03_se_vs_snr.png",
+    "category": "03_snr_analysis",
+    "data_source": "final_dataset.csv",
+    "description": "Mean spectral efficiency at each SNR level.",
+    "interpretation": "SE improves with SNR. Oracle leads; AI close to Fixed OTFS."
+  },
+  {
+    "graph_id": 18,
+    "title": "BER vs Speed by Strategy",
+    "filename": "04_ber_vs_speed.png",
+    "category": "04_mobility_analysis",
+    "data_source": "final_dataset.csv",
+    "description": "Mean BER at each speed bin (rounded to nearest 25 km/h).",
+    "interpretation": "Higher speed generally increases BER. AI tracks Fixed OTFS."
+  },
+  {
+    "graph_id": 19,
+    "title": "ACS vs Speed by Strategy",
+    "filename": "04_acs_vs_speed.png",
+    "category": "04_mobility_analysis",
+    "data_source": "final_dataset.csv",
+    "description": "Mean ACS at each speed bin.",
+    "interpretation": "ACS degrades at higher speeds for all strategies."
+  },
+  {
+    "graph_id": 20,
+    "title": "Throughput vs Speed by Strategy",
+    "filename": "04_tp_vs_speed.png",
+    "category": "04_mobility_analysis",
+    "data_source": "final_dataset.csv",
+    "description": "Mean throughput at each speed bin.",
+    "interpretation": "Throughput decreases at higher speeds."
+  },
+  {
+    "graph_id": 21,
+    "title": "BER vs Doppler Frequency by Strategy",
+    "filename": "04_ber_vs_doppler.png",
+    "category": "04_mobility_analysis",
+    "data_source": "final_dataset.csv",
+    "description": "Mean BER at each Doppler frequency bin (rounded to nearest 10 Hz).",
+    "interpretation": "Higher Doppler generally correlates with higher BER."
+  },
+  {
+    "graph_id": 22,
+    "title": "ACS vs Doppler Frequency by Strategy",
+    "filename": "04_acs_vs_doppler.png",
+    "category": "04_mobility_analysis",
+    "data_source": "final_dataset.csv",
+    "description": "Mean ACS at each Doppler frequency bin.",
+    "interpretation": "ACS degrades with higher Doppler. AI tracks Fixed OTFS."
+  },
+  {
+    "graph_id": 23,
+    "title": "BER by Channel Profile",
+    "filename": "05_channel_ber.png",
+    "category": "05_channel_analysis",
+    "data_source": "final_dataset.csv",
+    "description": "Mean BER for each channel profile across all strategies.",
+    "interpretation": "ETU (most dispersive) generally shows highest BER. AI Adaptive tracks Fixed OTFS across all channels."
+  },
+  {
+    "graph_id": 24,
+    "title": "ACS by Channel Profile",
+    "filename": "05_channel_acs.png",
+    "category": "05_channel_analysis",
+    "data_source": "final_dataset.csv",
+    "description": "Mean ACS for each channel profile across all strategies.",
+    "interpretation": "EPA (least dispersive) shows highest ACS."
+  },
+  {
+    "graph_id": 25,
+    "title": "Throughput by Channel Profile",
+    "filename": "05_channel_tp.png",
+    "category": "05_channel_analysis",
+    "data_source": "final_dataset.csv",
+    "description": "Mean throughput for each channel profile.",
+    "interpretation": "EPA yields highest throughput; ETU lowest."
+  },
+  {
+    "graph_id": 26,
+    "title": "CQI by Channel Profile",
+    "filename": "05_channel_cqi.png",
+    "category": "05_channel_analysis",
+    "data_source": "final_dataset.csv",
+    "description": "Mean CQI for each channel profile.",
+    "interpretation": "CQI relatively stable across channels since it is a channel property."
+  },
+  {
+    "graph_id": 27,
+    "title": "BER by Modulation",
+    "filename": "06_mod_ber.png",
+    "category": "06_modulation_analysis",
+    "data_source": "final_dataset.csv",
+    "description": "Mean BER for each modulation type across strategies.",
+    "interpretation": "64-QAM shows highest BER as expected (dense constellation). AI Adaptive tracks Fixed OTFS across all modulations."
+  },
+  {
+    "graph_id": 28,
+    "title": "Throughput by Modulation",
+    "filename": "06_mod_tp.png",
+    "category": "06_modulation_analysis",
+    "data_source": "final_dataset.csv",
+    "description": "Mean throughput for each modulation type.",
+    "interpretation": "64-QAM throughput lower due to high BER. QPSK most robust."
+  },
+  {
+    "graph_id": 29,
+    "title": "ACS by Modulation",
+    "filename": "06_mod_acs.png",
+    "category": "06_modulation_analysis",
+    "data_source": "final_dataset.csv",
+    "description": "Mean ACS for each modulation type.",
+    "interpretation": "QPSK achieves highest ACS. 64-QAM lowest."
+  },
+  {
+    "graph_id": 30,
+    "title": "CQI by Modulation",
+    "filename": "06_mod_cqi.png",
+    "category": "06_modulation_analysis",
+    "data_source": "final_dataset.csv",
+    "description": "Mean CQI for each modulation type.",
+    "interpretation": "CQI similar across modulations since it is channel-dependent."
+  },
+  {
+    "graph_id": 31,
+    "title": "Predicted vs Actual BER",
+    "filename": "07_pred_actual_ber.png",
+    "category": "07_ai_analysis",
+    "data_source": "predicted_vs_actual.csv",
+    "description": "AI engine predicted BER vs actual measured BER for both waveforms.",
+    "interpretation": "Scatter around y=x indicates prediction quality."
+  },
+  {
+    "graph_id": 32,
+    "title": "Predicted vs Actual Throughput",
+    "filename": "07_pred_actual_tp.png",
+    "category": "07_ai_analysis",
+    "data_source": "predicted_vs_actual.csv",
+    "description": "AI engine predicted throughput vs actual throughput.",
+    "interpretation": "Clustering along y=x indicates good prediction."
+  },
+  {
+    "graph_id": 33,
+    "title": "Predicted vs Actual ACS",
+    "filename": "07_pred_actual_acs.png",
+    "category": "07_ai_analysis",
+    "data_source": "predicted_vs_actual.csv",
+    "description": "AI engine predicted ACS vs actual ACS.",
+    "interpretation": "Scatter along y=x indicates prediction calibration."
+  },
+  {
+    "graph_id": 34,
+    "title": "AI-Oracle Decision Agreement by Environment",
+    "filename": "08_ai_oracle_agreement_env.png",
+    "category": "08_oracle_analysis",
+    "data_source": "oracle_comparison.csv",
+    "description": "Oracle agreement rate by environment category.",
+    "interpretation": "Pedestrian and UrbanFast show highest agreement. Urban (most dynamic) shows lower agreement where switching matters most."
+  },
+  {
+    "graph_id": 35,
+    "title": "AI Waveform Switching Timeline",
+    "filename": "09_switching_timeline.png",
+    "category": "09_digital_twin",
+    "data_source": "oracle_comparison.csv",
+    "description": "Step plot of AI waveform selection over frames for scenarios with at least one switch.",
+    "interpretation": "Red markers indicate switching points. Total 22 switches across all scenarios."
+  },
+  {
+    "graph_id": 36,
+    "title": "Scenario ACS Heatmap",
+    "filename": "10_scenario_acs_heatmap.png",
+    "category": "10_summary",
+    "data_source": "scenario_summary.csv",
+    "description": "Heatmap of mean ACS per scenario and strategy.",
+    "interpretation": "Shows where adaptation helps (AI close to oracle) and where it does not."
+  },
+  {
+    "graph_id": 37,
+    "title": "Scenario BER Heatmap",
+    "filename": "10_scenario_ber_heatmap.png",
+    "category": "10_summary",
+    "data_source": "scenario_summary.csv",
+    "description": "Heatmap of mean BER per scenario and strategy.",
+    "interpretation": "Lower BER is better. Shows where AI narrows the gap to oracle."
+  },
+  {
+    "graph_id": 38,
+    "title": "ACS and BER Regret Distribution",
+    "filename": "08_regret_distribution.png",
+    "category": "08_oracle_analysis",
+    "data_source": "oracle_comparison.csv",
+    "description": "Distribution of regret (oracle metric minus AI-selected metric).",
+    "interpretation": "Low mean regret indicates AI close to oracle. Tail values show worst-case suboptimal decisions."
+  },
+  {
+    "graph_id": 39,
+    "title": "AI vs Oracle ACS Gap by Environment",
+    "filename": "08_oracle_gap_env.png",
+    "category": "08_oracle_analysis",
+    "data_source": "oracle_comparison.csv",
+    "description": "Oracle ACS vs AI Adaptive ACS for each environment.",
+    "interpretation": "Smaller gap means AI closer to ideal. Urban environments show largest gap where switching decisions matter most."
+  },
+  {
+    "graph_id": 40,
+    "title": "Strategy Comparison Summary Table",
+    "filename": "10_summary_table.png",
+    "category": "10_summary",
+    "data_source": "final_dataset.csv",
+    "description": "Tabular comparison of key metrics across all strategies.",
+    "interpretation": "Quick reference for overall strategy performance."
+  },
+  {
+    "graph_id": 41,
+    "title": "AI Adaptive ACS vs SNR by Environment",
+    "filename": "03_acs_snr_environment.png",
+    "category": "03_snr_analysis",
+    "data_source": "final_dataset.csv",
+    "description": "AI Adaptive ACS at each SNR level, broken down by environment.",
+    "interpretation": "Different environments show different ACS-SNR profiles."
+  },
+  {
+    "graph_id": 42,
+    "title": "AI Prediction Confidence Distribution",
+    "filename": "07_ai_confidence_hist.png",
+    "category": "07_ai_analysis",
+    "data_source": "final_dataset.csv",
+    "description": "Distribution of AI engine confidence scores.",
+    "interpretation": "Low confidence values suggest the AI engine may benefit from calibration or richer features."
+  }
+]

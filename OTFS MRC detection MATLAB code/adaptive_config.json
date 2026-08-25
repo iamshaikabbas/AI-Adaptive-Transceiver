@@ -1,0 +1,6 @@
+{
+  "_comment": "Adaptive waveform-switching policy (shared by ai_engine.py and the MATLAB digital twin runtime).",
+  "switch_threshold_acs": 0.01,
+  "switch_threshold_rel": 0.02,
+  "min_dwell_frames": 3
+}

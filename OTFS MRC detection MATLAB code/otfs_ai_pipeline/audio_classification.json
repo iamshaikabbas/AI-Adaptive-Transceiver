@@ -1,0 +1,15 @@
+{
+  "environment": "Bus",
+  "confidence": 0.55,
+  "estimated_mobility": "Medium",
+  "noise_level": "High",
+  "mapped_profile": "Urban",
+  "features": {
+    "rms": 0.09381289178164538,
+    "zcr": 0.06501664088501383,
+    "centroid_hz": 1358.6139407994172,
+    "bandwidth_hz": 1797.2582605073214,
+    "rolloff_hz": 3448.25,
+    "flatness": 0.36829992242896376
+  }
+}

@@ -1,0 +1,545 @@
+{
+ "latency_noise": {
+  "mean_latency_ms": {
+   "fixed_otfs": 31.601159999999997,
+   "fixed_oddm": 78.56494083333334,
+   "AI_phase3": 35.84597833333334,
+   "AI_phase4": 34.84719583333334,
+   "oracle": 36.04538124999999
+  },
+  "frames_with_oracle_flip": 4,
+  "max_abs_dACS_on_flips": 0.015931540249190967,
+  "spearman_abs_dACS_vs_abs_dLat": 0.8126338998940953
+ },
+ "final_table": [
+  {
+   "frames": 240,
+   "mean_ACS": 0.47781663922205075,
+   "mean_BER": 0.05713324652777777,
+   "mean_TP": 296250.0,
+   "mean_CQI": 10.8625,
+   "switches": 0,
+   "agreement": 0.8875,
+   "acs_regret_mean": 0.016315264533316057,
+   "abs_ber_excess_mean": NaN,
+   "abs_ber_regret": 0.006040219907407413,
+   "strategy": "fixed_otfs"
+  },
+  {
+   "frames": 240,
+   "mean_ACS": 0.45166781513399956,
+   "mean_BER": 0.07994683159722221,
+   "mean_TP": 303157.8947368422,
+   "mean_CQI": 10.175,
+   "switches": 0,
+   "agreement": 0.1125,
+   "acs_regret_mean": 0.0424640886213672,
+   "abs_ber_excess_mean": NaN,
+   "abs_ber_regret": 0.028853804976851857,
+   "strategy": "fixed_oddm"
+  },
+  {
+   "frames": 240,
+   "mean_ACS": 0.48070903678723526,
+   "mean_BER": 0.05723307291666667,
+   "mean_TP": 303654.97076023393,
+   "mean_CQI": 10.8375,
+   "switches": 10,
+   "agreement": 0.825,
+   "acs_regret_mean": 0.013422866968131612,
+   "abs_ber_excess_mean": NaN,
+   "abs_ber_regret": 0.006140046296296302,
+   "strategy": "AI_phase3"
+  },
+  {
+   "frames": 240,
+   "mean_ACS": 0.47629578863650096,
+   "mean_BER": 0.05713324652777777,
+   "mean_TP": 296250.0,
+   "mean_CQI": 10.8625,
+   "switches": 0,
+   "agreement": 0.8791666666666667,
+   "acs_regret_mean": 0.016183800433544032,
+   "abs_ber_excess_mean": NaN,
+   "abs_ber_regret": 0.006040219907407413,
+   "strategy": "AI_phase4"
+  },
+  {
+   "frames": 240,
+   "mean_ACS": 0.49413190375536686,
+   "mean_BER": 0.05465422453703703,
+   "mean_TP": 318698.83040935674,
+   "mean_CQI": 11.016666666666667,
+   "switches": 0,
+   "agreement": 1.0,
+   "acs_regret_mean": NaN,
+   "abs_ber_excess_mean": NaN,
+   "abs_ber_regret": 0.003561197916666668,
+   "strategy": "oracle"
+  }
+ ],
+ "fairness": {
+  "seed_match": true,
+  "payload_match": true,
+  "channel_match": true
+ },
+ "verdict": {
+  "P4_beats_fixed_OTFS_on_ACS": false,
+  "P4_beats_fixed_ODDM_on_ACS": true,
+  "P4_beats_P3_on_ACS": false,
+  "P4_vs_P3_dACS": -0.004413248150734295,
+  "P4_vs_P3_agreement": 0.054166666666666696,
+  "action": "PHASE 3 REMAINS THE PREFERRED BASELINE (section 19 honesty rule); the P4 policy is reported as a conservatism/robustness variant, not an improvement."
+ },
+ "prediction_accuracy": {
+  "OTFS": {
+   "BER": {
+    "n": 336,
+    "MAE": 0.04192510539632596,
+    "RMSE": 0.066024399454098,
+    "R2": 0.4563363709345447
+   },
+   "TP": {
+    "n": 336,
+    "MAE": 213186.79200299786,
+    "RMSE": 344219.92325948214,
+    "R2": 0.2856306403915879
+   },
+   "CQI": {
+    "n": 336,
+    "MAE": 2.3655902777777764,
+    "RMSE": 3.0666717828883865,
+    "R2": 0.4885623410091676
+   },
+   "ACS": {
+    "n": 336,
+    "MAE": 0.16866726924577052,
+    "RMSE": 0.25109806328612927,
+    "R2": 0.4474649243643126
+   }
+  },
+  "ODDM": {
+   "BER": {
+    "n": 336,
+    "MAE": 0.04135922092832275,
+    "RMSE": 0.06808724650595258,
+    "R2": 0.6423891682742053
+   },
+   "TP": {
+    "n": 336,
+    "MAE": 207336.15138634574,
+    "RMSE": 338367.03252986394,
+    "R2": 0.23393474904804312
+   },
+   "CQI": {
+    "n": 336,
+    "MAE": 2.4352926587301584,
+    "RMSE": 3.19530339282979,
+    "R2": 0.41798282118249597
+   },
+   "ACS": {
+    "n": 336,
+    "MAE": 0.17604055554508513,
+    "RMSE": 0.25946466576238253,
+    "R2": 0.34673261663415855
+   }
+  }
+ },
+ "zero_ber_frames": 89,
+ "breakdowns": [
+  {
+   "group": "environment",
+   "value": "HighSpeedRail",
+   "order_acc": 0.7976190476190477,
+   "n": 84
+  },
+  {
+   "group": "environment",
+   "value": "Highway",
+   "order_acc": 0.8888888888888888,
+   "n": 18
+  },
+  {
+   "group": "environment",
+   "value": "Pedestrian",
+   "order_acc": 1.0,
+   "n": 44
+  },
+  {
+   "group": "environment",
+   "value": "Urban",
+   "order_acc": 0.7469879518072289,
+   "n": 166
+  },
+  {
+   "group": "environment",
+   "value": "UrbanFast",
+   "order_acc": 1.0,
+   "n": 24
+  },
+  {
+   "group": "channel_profile",
+   "value": "EPA",
+   "order_acc": 1.0,
+   "n": 44
+  },
+  {
+   "group": "channel_profile",
+   "value": "ETU",
+   "order_acc": 1.0,
+   "n": 24
+  },
+  {
+   "group": "channel_profile",
+   "value": "EVA",
+   "order_acc": 0.7723880597014925,
+   "n": 268
+  },
+  {
+   "group": "snr_bin",
+   "value": "<=10dB",
+   "order_acc": 0.6987951807228916,
+   "n": 166
+  },
+  {
+   "group": "snr_bin",
+   "value": "10-15dB",
+   "order_acc": 0.9035087719298246,
+   "n": 114
+  },
+  {
+   "group": "snr_bin",
+   "value": ">15dB",
+   "order_acc": 1.0,
+   "n": 56
+  },
+  {
+   "group": "speed_bin",
+   "value": "<30km/h",
+   "order_acc": 0.7786259541984732,
+   "n": 131
+  },
+  {
+   "group": "speed_bin",
+   "value": "30-120km/h",
+   "order_acc": 0.8760330578512396,
+   "n": 121
+  },
+  {
+   "group": "speed_bin",
+   "value": ">120km/h",
+   "order_acc": 0.7976190476190477,
+   "n": 84
+  }
+ ],
+ "robustness_transitions": [
+  {
+   "policy": "P4_live",
+   "scenario": "M",
+   "frame": 7,
+   "kind": "env",
+   "note": "already-on-new"
+  },
+  {
+   "policy": "P4_live",
+   "scenario": "M",
+   "frame": 13,
+   "kind": "env",
+   "note": "already-on-new"
+  },
+  {
+   "policy": "P4_live",
+   "scenario": "M",
+   "frame": 19,
+   "kind": "env",
+   "det_delay": NaN,
+   "switch_delay": NaN,
+   "degraded_ACS_sum": 0.010067577209935301,
+   "recovery": NaN
+  },
+  {
+   "policy": "P4_live",
+   "scenario": "N",
+   "frame": 7,
+   "kind": "env",
+   "note": "already-on-new"
+  },
+  {
+   "policy": "P4_live",
+   "scenario": "N",
+   "frame": 13,
+   "kind": "env",
+   "note": "already-on-new"
+  },
+  {
+   "policy": "P4_live",
+   "scenario": "N",
+   "frame": 19,
+   "kind": "env",
+   "note": "already-on-new"
+  },
+  {
+   "policy": "P4_live",
+   "scenario": "O",
+   "frame": 6,
+   "kind": "snr",
+   "note": "already-on-new"
+  },
+  {
+   "policy": "P4_live",
+   "scenario": "O",
+   "frame": 11,
+   "kind": "snr",
+   "note": "already-on-new"
+  },
+  {
+   "policy": "P4_live",
+   "scenario": "O",
+   "frame": 16,
+   "kind": "snr",
+   "note": "already-on-new"
+  },
+  {
+   "policy": "P4_live",
+   "scenario": "O",
+   "frame": 21,
+   "kind": "snr",
+   "note": "already-on-new"
+  },
+  {
+   "policy": "P4_live",
+   "scenario": "P",
+   "frame": 6,
+   "kind": "snr",
+   "note": "already-on-new"
+  },
+  {
+   "policy": "P4_live",
+   "scenario": "P",
+   "frame": 11,
+   "kind": "snr",
+   "note": "already-on-new"
+  },
+  {
+   "policy": "P4_live",
+   "scenario": "P",
+   "frame": 16,
+   "kind": "snr",
+   "note": "already-on-new"
+  },
+  {
+   "policy": "P4_live",
+   "scenario": "P",
+   "frame": 21,
+   "kind": "snr",
+   "note": "already-on-new"
+  },
+  {
+   "policy": "P4_live",
+   "scenario": "R",
+   "frame": 9,
+   "kind": "profile",
+   "note": "already-on-new"
+  },
+  {
+   "policy": "P4_live",
+   "scenario": "R",
+   "frame": 17,
+   "kind": "profile",
+   "note": "already-on-new"
+  },
+  {
+   "policy": "P3_replay",
+   "scenario": "M",
+   "frame": 7,
+   "kind": "env",
+   "note": "already-on-new"
+  },
+  {
+   "policy": "P3_replay",
+   "scenario": "M",
+   "frame": 13,
+   "kind": "env",
+   "note": "already-on-new"
+  },
+  {
+   "policy": "P3_replay",
+   "scenario": "M",
+   "frame": 19,
+   "kind": "env",
+   "det_delay": NaN,
+   "switch_delay": NaN,
+   "degraded_ACS_sum": 0.014499356932202057,
+   "recovery": NaN
+  },
+  {
+   "policy": "P3_replay",
+   "scenario": "N",
+   "frame": 7,
+   "kind": "env",
+   "note": "already-on-new"
+  },
+  {
+   "policy": "P3_replay",
+   "scenario": "N",
+   "frame": 13,
+   "kind": "env",
+   "note": "already-on-new"
+  },
+  {
+   "policy": "P3_replay",
+   "scenario": "N",
+   "frame": 19,
+   "kind": "env",
+   "note": "already-on-new"
+  },
+  {
+   "policy": "P3_replay",
+   "scenario": "O",
+   "frame": 6,
+   "kind": "snr",
+   "note": "already-on-new"
+  },
+  {
+   "policy": "P3_replay",
+   "scenario": "O",
+   "frame": 11,
+   "kind": "snr",
+   "note": "already-on-new"
+  },
+  {
+   "policy": "P3_replay",
+   "scenario": "O",
+   "frame": 16,
+   "kind": "snr",
+   "det_delay": 0.0,
+   "switch_delay": NaN,
+   "degraded_ACS_sum": 0.10885571370621798,
+   "recovery": NaN
+  },
+  {
+   "policy": "P3_replay",
+   "scenario": "O",
+   "frame": 21,
+   "kind": "snr",
+   "det_delay": 0.0,
+   "switch_delay": NaN,
+   "degraded_ACS_sum": 0.038028484190415004,
+   "recovery": NaN
+  },
+  {
+   "policy": "P3_replay",
+   "scenario": "P",
+   "frame": 6,
+   "kind": "snr",
+   "note": "already-on-new"
+  },
+  {
+   "policy": "P3_replay",
+   "scenario": "P",
+   "frame": 11,
+   "kind": "snr",
+   "note": "already-on-new"
+  },
+  {
+   "policy": "P3_replay",
+   "scenario": "P",
+   "frame": 16,
+   "kind": "snr",
+   "det_delay": 0.0,
+   "switch_delay": NaN,
+   "degraded_ACS_sum": 1.5337919709421142,
+   "recovery": NaN
+  },
+  {
+   "policy": "P3_replay",
+   "scenario": "P",
+   "frame": 21,
+   "kind": "snr",
+   "det_delay": 0.0,
+   "switch_delay": NaN,
+   "degraded_ACS_sum": 0.7438593937562631,
+   "recovery": NaN
+  },
+  {
+   "policy": "P3_replay",
+   "scenario": "R",
+   "frame": 9,
+   "kind": "profile",
+   "note": "already-on-new"
+  },
+  {
+   "policy": "P3_replay",
+   "scenario": "R",
+   "frame": 17,
+   "kind": "profile",
+   "note": "already-on-new"
+  }
+ ],
+ "robustness_summary": {
+  "P3_replay": {
+   "frames": 144,
+   "mean_ACS": 0.5024246914975199,
+   "mean_BER": 0.047934626436781605,
+   "mean_TP": 330110.8674463938,
+   "mean_CQI": 10.61111111111111,
+   "switches": 2,
+   "switch_rate": 0.013888888888888888,
+   "avg_gap": 24.0,
+   "agreement": 0.7430555555555556,
+   "order_acc": 0.8541666666666666,
+   "acs_regret_mean": 0.013470456424160577,
+   "acs_regret_p90": 0.02001483001264524,
+   "ber_regret_mean": NaN,
+   "bad_switches": 2
+  },
+  "P4_replay": {
+   "frames": 144,
+   "mean_ACS": 0.5111751681313682,
+   "mean_BER": 0.04897267620530012,
+   "mean_TP": 336458.3333333333,
+   "mean_CQI": 10.63888888888889,
+   "switches": 0,
+   "switch_rate": 0.0,
+   "avg_gap": NaN,
+   "agreement": 0.9236111111111112,
+   "order_acc": 0.8541666666666666,
+   "acs_regret_mean": 0.00471997979031223,
+   "acs_regret_p90": 0.0,
+   "ber_regret_mean": NaN,
+   "bad_switches": 0
+  }
+ },
+ "replay_identity": {
+  "decision_mismatches": 0,
+  "band_mismatches": 0
+ },
+ "oscillation_pairs": {
+  "P3_replay_difficult": 0,
+  "P4_replay_difficult": 0,
+  "P4_live_difficult": 0,
+  "P3_baseline_AD": 0
+ },
+ "band_usage": {
+  "AD_P4_live": {
+   "HIGH": 94,
+   "MEDIUM": 88,
+   "LOW": 58
+  },
+  "MR_P4_live": {
+   "MEDIUM": 72,
+   "HIGH": 41,
+   "LOW": 31
+  },
+  "EH_replay": {
+   "LOW": 39,
+   "HIGH": 38,
+   "MEDIUM": 19
+  },
+  "IL_replay": {
+   "HIGH": 64,
+   "LOW": 21,
+   "MEDIUM": 11
+  }
+ }
+}

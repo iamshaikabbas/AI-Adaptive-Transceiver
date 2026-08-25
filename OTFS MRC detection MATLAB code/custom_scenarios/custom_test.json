@@ -1,0 +1,9 @@
+{
+  "name": "custom_test",
+  "description": "Constant-condition user scenario (spec section 12 example): Highway-like speed, moderate SNR, QPSK.",
+  "duration_frames": 60,
+  "initial_speed_kmph": 100,
+  "snr_db": 12,
+  "channel_profile": "EVA",
+  "modulation": 4
+}

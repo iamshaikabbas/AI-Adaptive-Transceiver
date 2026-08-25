@@ -1,0 +1,14 @@
+METRIC REGRESSOR TRAINING REPORT
+============================================================
+rows=9720  train=7290  test=2430 (unseen CondIDs)
+
+Target                 CQI  Log10BER  Throughput
+Model                                           
+DecisionTree      0.586205  0.424352   -0.040748
+GradientBoosting  0.743603  0.632247    0.390697
+RandomForest      0.715517  0.601846    0.334898
+
+best:
+  Log10BER    -> GradientBoosting (R2=0.6322)
+  Throughput  -> GradientBoosting (R2=0.3907)
+  CQI         -> GradientBoosting (R2=0.7436)

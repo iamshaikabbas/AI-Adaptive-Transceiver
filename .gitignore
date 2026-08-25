@@ -1,0 +1,65 @@
+# ============================================================
+# Python
+# ============================================================
+__pycache__/
+*.py[cod]
+*.pyc
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+
+# Environment / secrets
+.env
+.env.*
+*.log
+
+# ============================================================
+# Node / Frontend
+# ============================================================
+node_modules/
+frontend/dist/
+
+# ============================================================
+# IDE / OS
+# ============================================================
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# ============================================================
+# MATLAB temporary files
+# ============================================================
+*.asv
+
+# ============================================================
+# Runtime / temporary project files
+# ============================================================
+_tmp_*
+_smoke_*
+
+# ============================================================
+# MATLAB runtime state
+# ============================================================
+OTFS MRC detection MATLAB code/_ai_state.json
+OTFS MRC detection MATLAB code/_ai_decision.json
+OTFS MRC detection MATLAB code/_smoke_state.json
+OTFS MRC detection MATLAB code/_smoke_decision.json
+OTFS MRC detection MATLAB code/_smoke_frame_row.csv
+OTFS MRC detection MATLAB code/_t_state.json
+OTFS MRC detection MATLAB code/_t_dec.json
+
+# ============================================================
+# Generated Digital Twin runtime output
+# ============================================================
+OTFS MRC detection MATLAB code/Results/DigitalTwin/
+OTFS MRC detection MATLAB code/Results/LiveSimulation/
+
+# ============================================================
+# Realtime adaptive transient files
+# ============================================================
+OTFS MRC detection MATLAB code/Results/WaveformComparison/_rt_*.json
+# Generated audio recording
+OTFS MRC detection MATLAB code/otfs_ai_pipeline/recorded_audio.wav

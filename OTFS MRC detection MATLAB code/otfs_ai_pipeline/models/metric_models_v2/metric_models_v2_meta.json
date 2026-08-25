@@ -1,0 +1,90 @@
+{
+  "version": "metric-models-v2 (phase 3)",
+  "trained_from": "Results\\WaveformComparison\\phase2_dataset.csv",
+  "n_rows": 1158,
+  "features_cat": [
+    "environment",
+    "channel_profile",
+    "waveform"
+  ],
+  "features_num": [
+    "speed_kmph",
+    "snr_db",
+    "doppler_hz",
+    "carrier_frequency_hz",
+    "bandwidth_hz",
+    "delay_spread_taps",
+    "num_paths",
+    "doppler_spread_hz",
+    "modulation"
+  ],
+  "split_rule": "dataset split column (train/val/test); test axis values unseen by construction",
+  "random_state": 42,
+  "targets": {
+    "Log10BER": {
+      "file": "metric_reg_v2_Log10BER.joblib",
+      "column": "log10_ber",
+      "best_model": "RandomForest",
+      "val_R2": 0.9201910364805576,
+      "test_R2": 0.7546869104431525,
+      "test_MAE": 0.6704085687677863,
+      "test_RMSE": 1.886652998841466
+    },
+    "Throughput": {
+      "file": "metric_reg_v2_Throughput.joblib",
+      "column": "throughput_bps",
+      "best_model": "RandomForest",
+      "val_R2": 0.8507100718754036,
+      "test_R2": 0.8100691104036207,
+      "test_MAE": 81804.85195919298,
+      "test_RMSE": 187947.44030788954
+    },
+    "CQI": {
+      "file": "metric_reg_v2_CQI.joblib",
+      "column": "CQI",
+      "best_model": "RandomForest",
+      "val_R2": 0.9829797396214319,
+      "test_R2": 0.9396470558224043,
+      "test_MAE": 0.8110140018066853,
+      "test_RMSE": 1.0799745200079065
+    },
+    "ACS": {
+      "file": "metric_reg_v2_ACS.joblib",
+      "column": "ACS",
+      "best_model": "RandomForest",
+      "val_R2": 0.9513920759763371,
+      "test_R2": 0.8836317683395394,
+      "test_MAE": 0.0543103832661654,
+      "test_RMSE": 0.10159807834532246
+    },
+    "PER": {
+      "file": "metric_reg_v2_PER.joblib",
+      "column": "PER",
+      "best_model": "RandomForest",
+      "val_R2": 0.9138177373984847,
+      "test_R2": 0.8422243968647003,
+      "test_MAE": 0.06828139114724467,
+      "test_RMSE": 0.14958263558989393
+    },
+    "SE": {
+      "file": "metric_reg_v2_SE.joblib",
+      "column": "spectral_efficiency",
+      "best_model": "RandomForest",
+      "val_R2": 0.8528886756776681,
+      "test_R2": 0.8093779774857358,
+      "test_MAE": 0.17118207145560219,
+      "test_RMSE": 0.39226893228057136
+    }
+  },
+  "latency_lookup_ms": [
+    {
+      "waveform": "ODDM",
+      "latency_median_ms": 66.4743
+    },
+    {
+      "waveform": "OTFS",
+      "latency_median_ms": 12.8918666666667
+    }
+  ],
+  "derived_note": "Latency not regressed: per-waveform training median (v1 convention). SpectralEfficiency and PER regressed directly from measured columns."
+}

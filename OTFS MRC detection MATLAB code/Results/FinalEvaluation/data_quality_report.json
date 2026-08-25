@@ -1,0 +1,178 @@
+{
+  "total_rows": 2336,
+  "total_columns": 82,
+  "scenarios_found": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+    "N",
+    "O",
+    "P",
+    "Q",
+    "R"
+  ],
+  "strategies_found": [
+    "ai_adaptive",
+    "fixed_oddm",
+    "fixed_otfs",
+    "oracle"
+  ],
+  "checks": {
+    "no_duplicates": {
+      "pass": true,
+      "duplicate_count": 0
+    },
+    "no_missing_required": {
+      "pass": true,
+      "details": {
+        "frame": 0,
+        "scenario_id": 0,
+        "environment": 0,
+        "strategy": 0,
+        "waveform": 0,
+        "BER": 0,
+        "SER": 0,
+        "throughput_bps": 0,
+        "CQI": 0,
+        "ACS": 0,
+        "snr_db": 0,
+        "speed_kmph": 0,
+        "doppler_hz": 0,
+        "modulation": 0,
+        "channel_profile": 0,
+        "actual_BER_OTFS": 0,
+        "actual_ACS_OTFS": 0,
+        "actual_BER_ODDM": 0,
+        "actual_ACS_ODDM": 0,
+        "oracle_waveform": 0,
+        "oracle_BER": 0,
+        "oracle_ACS": 0,
+        "decision_correct": {
+          "null_in_ai_rows": 0,
+          "scope": "ai_adaptive_only"
+        },
+        "predicted_OTFS_BER": {
+          "null_in_ai_rows": 0,
+          "scope": "ai_adaptive_only"
+        },
+        "predicted_ODDM_BER": {
+          "null_in_ai_rows": 0,
+          "scope": "ai_adaptive_only"
+        },
+        "predicted_OTFS_ACS": {
+          "null_in_ai_rows": 0,
+          "scope": "ai_adaptive_only"
+        },
+        "predicted_ODDM_ACS": {
+          "null_in_ai_rows": 0,
+          "scope": "ai_adaptive_only"
+        }
+      }
+    },
+    "ber_nonnegative_finite": {
+      "pass": true,
+      "negative_count": 0,
+      "infinite_count": 0
+    },
+    "ber_le_1": {
+      "pass": true,
+      "over_one_count": 0
+    },
+    "throughput_nonnegative": {
+      "pass": true,
+      "negative_count": 0
+    },
+    "cqi_range": {
+      "pass": true,
+      "out_of_range_count": 0
+    },
+    "acs_range": {
+      "pass": true,
+      "out_of_range_count": 0
+    },
+    "ser_ge_ber": {
+      "pass": true,
+      "violation_count": 0,
+      "total_compared": 2336,
+      "note": "diagnostic only - SER >= BER is expected but not enforced"
+    },
+    "valid_waveforms": {
+      "pass": true,
+      "invalid_values": []
+    },
+    "valid_channels": {
+      "pass": true,
+      "invalid_values": []
+    },
+    "valid_modulations": {
+      "pass": true,
+      "invalid_values": []
+    },
+    "valid_strategies": {
+      "pass": true,
+      "invalid_values": []
+    },
+    "consistent_seeds": {
+      "pass": true,
+      "inconsistent_count": 0,
+      "examples": []
+    },
+    "latency_modeled_nan": {
+      "pass": true,
+      "non_nan_count": 0
+    },
+    "ai_prediction_columns": {
+      "pass": true,
+      "details": {
+        "predicted_OTFS_BER": {
+          "non_null": 584,
+          "total_ai_rows": 584
+        },
+        "predicted_ODDM_BER": {
+          "non_null": 584,
+          "total_ai_rows": 584
+        },
+        "predicted_OTFS_ACS": {
+          "non_null": 584,
+          "total_ai_rows": 584
+        },
+        "predicted_ODDM_ACS": {
+          "non_null": 584,
+          "total_ai_rows": 584
+        }
+      }
+    },
+    "oracle_comparison_fields": {
+      "pass": true,
+      "details": {
+        "oracle_waveform": {
+          "non_null": 584,
+          "total_ai_rows": 584
+        },
+        "oracle_BER": {
+          "non_null": 584,
+          "total_ai_rows": 584
+        },
+        "oracle_ACS": {
+          "non_null": 584,
+          "total_ai_rows": 584
+        },
+        "decision_correct": {
+          "non_null": 584,
+          "total_ai_rows": 584
+        }
+      }
+    }
+  },
+  "overall_pass": true
+}

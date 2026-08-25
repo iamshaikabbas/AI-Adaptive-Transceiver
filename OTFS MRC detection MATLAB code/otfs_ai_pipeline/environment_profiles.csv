@@ -1,0 +1,5 @@
+Environment,SpeedMin,SpeedMax,DelayProfile,DopplerScale,Category
+Indoor,0,5,EPA,0.5,LowMobility
+Urban,10,50,EVA,1,MediumMobility
+Rural,50,100,ETU,1.5,HighMobility
+Highway,100,160,ETU,2,VeryHighMobility

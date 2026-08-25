@@ -1,0 +1,25 @@
+WAVEFORM SELECTOR TRAINING REPORT
+============================================================
+dataset            : waveform_dataset.csv
+pair groups        : 1620 (train 1215 / test 405)
+classes            : ['ODDM', 'OTFS']
+group split        : by CondID (unseen test conditions)
+
+           Model  Accuracy  MacroF1  Regret_log10
+ DecisionTreeBal  0.851852 0.617540      0.017677
+GradientBoosting  0.854321 0.532653      0.012347
+ RandomForestBal  0.871605 0.532000      0.121012
+    RandomForest  0.864198 0.526678      0.124535
+
+best model          : DecisionTreeBal
+test accuracy       : 0.8519 (always-OTFS baseline 0.8864)
+regret [log10]      : 0.0177 (baseline 0.0017)
+
+              precision    recall  f1-score   support
+
+        ODDM       0.33      0.30      0.32        46
+        OTFS       0.91      0.92      0.92       359
+
+    accuracy                           0.85       405
+   macro avg       0.62      0.61      0.62       405
+weighted avg       0.85      0.85      0.85       405

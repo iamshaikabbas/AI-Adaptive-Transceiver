@@ -1,0 +1,9 @@
+{
+  "default_mode": "FAST",
+  "default_scenario": "A",
+  "policy": "phase3",
+  "seed0": 20260823,
+  "strategies": ["fixed_otfs", "fixed_oddm", "ai_adaptive", "oracle"],
+  "out_root": "Results/DigitalTwin",
+  "notes": "policy phase3 = canonical (adaptive_config_v2.json + ai_engine_v2.py); policy phase4 = experimental (adaptive_config_v4.json + ai_engine_v3.py). seed0 is the master fairness seed; per-frame seeds derive via dt_seeds.m."
+}

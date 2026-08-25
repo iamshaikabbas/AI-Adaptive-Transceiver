@@ -1,0 +1,198 @@
+{
+  "model_name": "random_forest",
+  "features": [
+    "environment",
+    "speed_kmph",
+    "snr_db",
+    "doppler_hz",
+    "carrier_frequency_hz",
+    "bandwidth_hz",
+    "channel_profile",
+    "delay_spread_taps",
+    "num_paths",
+    "doppler_spread_hz",
+    "modulation"
+  ],
+  "cat_encodings": {
+    "environment": [
+      "HighSpeedRail",
+      "Highway",
+      "Pedestrian",
+      "Urban"
+    ],
+    "channel_profile": [
+      "EPA",
+      "ETU",
+      "EVA"
+    ]
+  },
+  "train_val_test_decisive": [
+    160,
+    31,
+    165
+  ],
+  "ties_excluded_from_training": 223,
+  "results": {
+    "random_forest": {
+      "val": {
+        "accuracy": 0.9354838709677419,
+        "recall_per_class": {
+          "OTFS": 0.966,
+          "ODDM": 0.5
+        },
+        "macro_f1": 0.7327586206896552,
+        "mean_confidence": 0.9398387096774192,
+        "wrong_conditions": 7,
+        "mean_BER_regret_rel": 5600358.494246997,
+        "median_BER_regret_rel": 0.0,
+        "mean_BER_regret_abs": 0.006609002286491179,
+        "mean_ACS_regret_abs": 0.00801278988704068,
+        "frac_BER_regret_gt_10pct": 0.22580645161290322
+      },
+      "test": {
+        "accuracy": 0.9454545454545454,
+        "recall_per_class": {
+          "OTFS": 0.981,
+          "ODDM": 0.25
+        },
+        "macro_f1": 0.6396505702499393,
+        "mean_confidence": 0.9642575757575758,
+        "wrong_conditions": 42,
+        "mean_BER_regret_rel": 15782828.369475806,
+        "median_BER_regret_rel": 0.0,
+        "mean_BER_regret_abs": 0.00674953558574248,
+        "mean_ACS_regret_abs": 0.01089036156610189,
+        "frac_BER_regret_gt_10pct": 0.2545454545454545
+      }
+    },
+    "gradient_boosting": {
+      "val": {
+        "accuracy": 0.9354838709677419,
+        "recall_per_class": {
+          "OTFS": 0.966,
+          "ODDM": 0.5
+        },
+        "macro_f1": 0.7327586206896552,
+        "mean_confidence": 0.9846084821224911,
+        "wrong_conditions": 7,
+        "mean_BER_regret_rel": 5600358.494246997,
+        "median_BER_regret_rel": 0.0,
+        "mean_BER_regret_abs": 0.006609002286491179,
+        "mean_ACS_regret_abs": 0.00801278988704068,
+        "frac_BER_regret_gt_10pct": 0.22580645161290322
+      },
+      "test": {
+        "accuracy": 0.9515151515151515,
+        "recall_per_class": {
+          "OTFS": 0.994,
+          "ODDM": 0.125
+        },
+        "macro_f1": 0.5875,
+        "mean_confidence": 0.9905103897228995,
+        "wrong_conditions": 45,
+        "mean_BER_regret_rel": 15782828.399953952,
+        "median_BER_regret_rel": 0.0,
+        "mean_BER_regret_abs": 0.006848441309648204,
+        "mean_ACS_regret_abs": 0.009877384939391273,
+        "frac_BER_regret_gt_10pct": 0.2727272727272727
+      }
+    },
+    "decision_tree": {
+      "val": {
+        "accuracy": 0.9354838709677419,
+        "recall_per_class": {
+          "OTFS": 0.966,
+          "ODDM": 0.5
+        },
+        "macro_f1": 0.7327586206896552,
+        "mean_confidence": 1.0,
+        "wrong_conditions": 7,
+        "mean_BER_regret_rel": 5600358.494246997,
+        "median_BER_regret_rel": 0.0,
+        "mean_BER_regret_abs": 0.006609002286491179,
+        "mean_ACS_regret_abs": 0.00801278988704068,
+        "frac_BER_regret_gt_10pct": 0.22580645161290322
+      },
+      "test": {
+        "accuracy": 0.9515151515151515,
+        "recall_per_class": {
+          "OTFS": 0.987,
+          "ODDM": 0.25
+        },
+        "macro_f1": 0.6540880503144654,
+        "mean_confidence": 1.0,
+        "wrong_conditions": 43,
+        "mean_BER_regret_rel": 15782828.384168185,
+        "median_BER_regret_rel": 0.0,
+        "mean_BER_regret_abs": 0.006833710669917563,
+        "mean_ACS_regret_abs": 0.00995154041742286,
+        "frac_BER_regret_gt_10pct": 0.2606060606060606
+      }
+    },
+    "dummy_majority": {
+      "val": {
+        "accuracy": 0.9354838709677419,
+        "recall_per_class": {
+          "OTFS": 1.0,
+          "ODDM": 0.0
+        },
+        "macro_f1": 0.4833333333333333,
+        "mean_confidence": 1.0,
+        "wrong_conditions": 9,
+        "mean_BER_regret_rel": 5600358.632565668,
+        "median_BER_regret_rel": 0.0,
+        "mean_BER_regret_abs": 0.006765812322333474,
+        "mean_ACS_regret_abs": 0.008108455536573645,
+        "frac_BER_regret_gt_10pct": 0.2903225806451613
+      },
+      "test": {
+        "accuracy": 0.9515151515151515,
+        "recall_per_class": {
+          "OTFS": 1.0,
+          "ODDM": 0.0
+        },
+        "macro_f1": 0.48757763975155277,
+        "mean_confidence": 1.0,
+        "wrong_conditions": 45,
+        "mean_BER_regret_rel": 14730639.884129101,
+        "median_BER_regret_rel": 0.0,
+        "mean_BER_regret_abs": 0.006853702252409145,
+        "mean_ACS_regret_abs": 0.008294828095180812,
+        "frac_BER_regret_gt_10pct": 0.2727272727272727
+      }
+    }
+  },
+  "feature_importance": {
+    "modulation": 0.3129,
+    "snr_db": 0.2024,
+    "delay_spread_taps": 0.0985,
+    "channel_profile": 0.0933,
+    "doppler_spread_hz": 0.0764,
+    "doppler_hz": 0.0694,
+    "environment": 0.0671,
+    "speed_kmph": 0.0395,
+    "carrier_frequency_hz": 0.0272,
+    "num_paths": 0.0132,
+    "bandwidth_hz": 0.0
+  },
+  "confusion_matrix_test": {
+    "labels": [
+      "OTFS",
+      "ODDM"
+    ],
+    "matrix": [
+      [
+        154,
+        3
+      ],
+      [
+        6,
+        2
+      ]
+    ]
+  },
+  "tie_region_predictions": {
+    "OTFS": 207,
+    "ODDM": 16
+  }
+}

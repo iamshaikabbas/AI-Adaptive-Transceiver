@@ -1,0 +1,22 @@
+{
+ "studyA": {
+  "overall_mae_v2style": 0.6666419899927045,
+  "two_part_mae": 0.6950736826349948,
+  "confusion": {
+   "true_zero_pred_zero": 42,
+   "true_zero_pred_pos": 26,
+   "true_pos_pred_zero": 2,
+   "true_pos_pred_pos": 422
+  }
+ },
+ "studyB": {
+  "Log10BER": {
+   "spearman": 0.7656618727750542,
+   "p": 5.968066092117226e-96
+  },
+  "ACS": {
+   "spearman": 0.7431569525785229,
+   "p": 1.5166393879852417e-87
+  }
+ }
+}

@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", "SF Mono", "Consolas", system-ui, -apple-system, sans-serif;
+  --font-mono: "SF Mono", "Consolas", "Liberation Mono", monospace;
+
+  --color-surface: #FFFFFF;
+  --color-surface-alt: #F7F7F5;
+  --color-surface-raised: #EEEEEE;
+  --color-border: #D9D9D9;
+  --color-border-subtle: #EEEEEE;
+
+  --color-text-primary: #111111;
+  --color-text-secondary: #333333;
+  --color-text-muted: #666666;
+
+  --color-black: #111111;
+  --color-dark-black: #000000;
+  --color-gold: #C9A227;
+  --color-gold-dark: #A8830F;
+  --color-gold-light: #E7D79A;
+
+  /* Semantic — all within white/black/gold */
+  --color-active: #C9A227;
+  --color-active-light: #F5EFC5;
+  --color-inactive: #999999;
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #FFFFFF;
+  color: #111111;
+}
+
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M3 5l3 3 3-3' fill='none' stroke='%23666666' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  padding-right: 28px;
+}
+
+/* Engineering console scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F7F7F5;
+}
+::-webkit-scrollbar-thumb {
+  background: #D9D9D9;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #999999;
+}

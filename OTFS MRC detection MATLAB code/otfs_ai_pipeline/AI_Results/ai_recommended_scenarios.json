@@ -1,0 +1,233 @@
+[
+  {
+    "Environment": "Bus",
+    "Speed_kmh": 36,
+    "DelayProfile": "EVA",
+    "DopplerSpread": 1.0,
+    "Modulation": "QPSK",
+    "SNR_dB": 0,
+    "Detector": "LMMSE",
+    "Recommendation_Confidence": 0.6733333333333333,
+    "Quality": "Poor"
+  },
+  {
+    "Environment": "Bus",
+    "Speed_kmh": 36,
+    "DelayProfile": "EVA",
+    "DopplerSpread": 1.0,
+    "Modulation": "QPSK",
+    "SNR_dB": 5,
+    "Detector": "LMMSE",
+    "Recommendation_Confidence": 0.6166666666666667,
+    "Quality": "Poor"
+  },
+  {
+    "Environment": "Bus",
+    "Speed_kmh": 36,
+    "DelayProfile": "EVA",
+    "DopplerSpread": 1.0,
+    "Modulation": "QPSK",
+    "SNR_dB": 10,
+    "Detector": "LMMSE",
+    "Recommendation_Confidence": 0.6366666666666667,
+    "Quality": "Poor"
+  },
+  {
+    "Environment": "Bus",
+    "Speed_kmh": 36,
+    "DelayProfile": "EVA",
+    "DopplerSpread": 1.0,
+    "Modulation": "QPSK",
+    "SNR_dB": 15,
+    "Detector": "LMMSE",
+    "Recommendation_Confidence": 0.5966666666666667,
+    "Quality": "Moderate"
+  },
+  {
+    "Environment": "Bus",
+    "Speed_kmh": 36,
+    "DelayProfile": "EVA",
+    "DopplerSpread": 1.0,
+    "Modulation": "QPSK",
+    "SNR_dB": 20,
+    "Detector": "MRC",
+    "Recommendation_Confidence": 0.51,
+    "Quality": "Excellent"
+  },
+  {
+    "Environment": "Bus",
+    "Speed_kmh": 36,
+    "DelayProfile": "EVA",
+    "DopplerSpread": 1.0,
+    "Modulation": "QPSK",
+    "SNR_dB": 25,
+    "Detector": "LMMSE",
+    "Recommendation_Confidence": 0.74,
+    "Quality": "Excellent"
+  },
+  {
+    "Environment": "Bus",
+    "Speed_kmh": 36,
+    "DelayProfile": "EVA",
+    "DopplerSpread": 1.0,
+    "Modulation": "QPSK",
+    "SNR_dB": 30,
+    "Detector": "LMMSE",
+    "Recommendation_Confidence": 0.92,
+    "Quality": "Excellent"
+  },
+  {
+    "Environment": "Bus",
+    "Speed_kmh": 36,
+    "DelayProfile": "EVA",
+    "DopplerSpread": 1.0,
+    "Modulation": "16QAM",
+    "SNR_dB": 0,
+    "Detector": "MRC",
+    "Recommendation_Confidence": 0.95,
+    "Quality": "Poor"
+  },
+  {
+    "Environment": "Bus",
+    "Speed_kmh": 36,
+    "DelayProfile": "EVA",
+    "DopplerSpread": 1.0,
+    "Modulation": "16QAM",
+    "SNR_dB": 5,
+    "Detector": "MRC",
+    "Recommendation_Confidence": 0.9666666666666667,
+    "Quality": "Poor"
+  },
+  {
+    "Environment": "Bus",
+    "Speed_kmh": 36,
+    "DelayProfile": "EVA",
+    "DopplerSpread": 1.0,
+    "Modulation": "16QAM",
+    "SNR_dB": 10,
+    "Detector": "MRC",
+    "Recommendation_Confidence": 0.9633333333333334,
+    "Quality": "Poor"
+  },
+  {
+    "Environment": "Bus",
+    "Speed_kmh": 36,
+    "DelayProfile": "EVA",
+    "DopplerSpread": 1.0,
+    "Modulation": "16QAM",
+    "SNR_dB": 15,
+    "Detector": "MRC",
+    "Recommendation_Confidence": 0.9633333333333334,
+    "Quality": "Poor"
+  },
+  {
+    "Environment": "Bus",
+    "Speed_kmh": 36,
+    "DelayProfile": "EVA",
+    "DopplerSpread": 1.0,
+    "Modulation": "16QAM",
+    "SNR_dB": 20,
+    "Detector": "MRC",
+    "Recommendation_Confidence": 0.93,
+    "Quality": "Poor"
+  },
+  {
+    "Environment": "Bus",
+    "Speed_kmh": 36,
+    "DelayProfile": "EVA",
+    "DopplerSpread": 1.0,
+    "Modulation": "16QAM",
+    "SNR_dB": 25,
+    "Detector": "MRC",
+    "Recommendation_Confidence": 0.88,
+    "Quality": "Good"
+  },
+  {
+    "Environment": "Bus",
+    "Speed_kmh": 36,
+    "DelayProfile": "EVA",
+    "DopplerSpread": 1.0,
+    "Modulation": "16QAM",
+    "SNR_dB": 30,
+    "Detector": "MRC",
+    "Recommendation_Confidence": 0.7833333333333333,
+    "Quality": "Excellent"
+  },
+  {
+    "Environment": "Bus",
+    "Speed_kmh": 36,
+    "DelayProfile": "EVA",
+    "DopplerSpread": 1.0,
+    "Modulation": "64QAM",
+    "SNR_dB": 0,
+    "Detector": "MRC",
+    "Recommendation_Confidence": 0.77,
+    "Quality": "Poor"
+  },
+  {
+    "Environment": "Bus",
+    "Speed_kmh": 36,
+    "DelayProfile": "EVA",
+    "DopplerSpread": 1.0,
+    "Modulation": "64QAM",
+    "SNR_dB": 5,
+    "Detector": "MRC",
+    "Recommendation_Confidence": 0.94,
+    "Quality": "Poor"
+  },
+  {
+    "Environment": "Bus",
+    "Speed_kmh": 36,
+    "DelayProfile": "EVA",
+    "DopplerSpread": 1.0,
+    "Modulation": "64QAM",
+    "SNR_dB": 10,
+    "Detector": "MRC",
+    "Recommendation_Confidence": 0.9433333333333334,
+    "Quality": "Poor"
+  },
+  {
+    "Environment": "Bus",
+    "Speed_kmh": 36,
+    "DelayProfile": "EVA",
+    "DopplerSpread": 1.0,
+    "Modulation": "64QAM",
+    "SNR_dB": 15,
+    "Detector": "MRC",
+    "Recommendation_Confidence": 0.9433333333333334,
+    "Quality": "Poor"
+  },
+  {
+    "Environment": "Bus",
+    "Speed_kmh": 36,
+    "DelayProfile": "EVA",
+    "DopplerSpread": 1.0,
+    "Modulation": "64QAM",
+    "SNR_dB": 20,
+    "Detector": "MRC",
+    "Recommendation_Confidence": 0.9366666666666666,
+    "Quality": "Poor"
+  },
+  {
+    "Environment": "Bus",
+    "Speed_kmh": 36,
+    "DelayProfile": "EVA",
+    "DopplerSpread": 1.0,
+    "Modulation": "64QAM",
+    "SNR_dB": 25,
+    "Detector": "MRC",
+    "Recommendation_Confidence": 0.9233333333333333,
+    "Quality": "Poor"
+  },
+  {
+    "Environment": "Bus",
+    "Speed_kmh": 36,
+    "DelayProfile": "EVA",
+    "DopplerSpread": 1.0,
+    "Modulation": "64QAM",
+    "SNR_dB": 30,
+    "Detector": "MRC",
+    "Recommendation_Confidence": 0.92,
+    "Quality": "Moderate"
+  }
+]

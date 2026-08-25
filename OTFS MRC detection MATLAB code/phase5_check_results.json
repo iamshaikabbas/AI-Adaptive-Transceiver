@@ -1,0 +1,92 @@
+{
+  "driver": "phase5_checks_driver.m",
+  "when": "2026-08-24 00:34:12",
+  "scope": "all",
+  "results": [
+    {
+      "name": "C1_state_schema",
+      "pass": true,
+      "details": "missing fields: "
+    },
+    {
+      "name": "C2_scenario_library",
+      "pass": true,
+      "details": "18 letters + groups + custom resolved"
+    },
+    {
+      "name": "C3_seed_contract",
+      "pass": true,
+      "details": "f=17: pay=20260840 chan=202608247 noise=100017"
+    },
+    {
+      "name": "C4_paired_fairness",
+      "pass": true,
+      "details": "seeds follow dt_seeds; checksums identical across strategies"
+    },
+    {
+      "name": "C5_runtime_draw_parity",
+      "pass": true,
+      "details": "canonical primitives byte-equal frozen rng sequence"
+    },
+    {
+      "name": "C6_four_strategy_outputs",
+      "pass": true,
+      "details": "missing: "
+    },
+    {
+      "name": "C7_fallback_safety",
+      "pass": true,
+      "details": "fb=1 rec=ODDM err=python failed: '\"__no_such_python_executable__\"' is not reco"
+    },
+    {
+      "name": "C8_canonical_trace_schema",
+      "pass": true,
+      "details": "cols=78 missing=[] extra=[doppler_scale, predicted_ODDM_CQI, predicted_ODDM_TP, predicted_OTFS_CQI, predicted_OTFS_TP, uncertainty_ACS_ODDM, uncertainty_ACS_OTFS]"
+    },
+    {
+      "name": "C9_run_manifest",
+      "pass": true,
+      "details": "missing keys: "
+    },
+    {
+      "name": "C10_acs_consistency",
+      "pass": true,
+      "details": "stored ACS=0.271197851 recomputed=0.271197851"
+    },
+    {
+      "name": "C11_metric_sanity",
+      "pass": true,
+      "details": "BER/PER finite>=0, ACS in [0,1]"
+    },
+    {
+      "name": "C12_fast_frames",
+      "pass": true,
+      "details": "rows=12"
+    },
+    {
+      "name": "C13_transition_scenarios",
+      "pass": true,
+      "details": "O snr steps=[0;5;10;15;20] | M env blocks=4"
+    },
+    {
+      "name": "C14_policy_mapping_guard",
+      "pass": true,
+      "details": "phase3->adaptive_config_v2.json/ai_engine_v2.py, phase4->adaptive_config_v4.json/ai_engine_v3.py"
+    },
+    {
+      "name": "C15_oracle_leakage_scan",
+      "pass": true,
+      "details": "AI-state block tokens scanned; hits=0"
+    },
+    {
+      "name": "C16_latency_discipline",
+      "pass": true,
+      "details": "latency_ms_modeled always NaN; detector_time<=wall_clock; both measured"
+    },
+    {
+      "name": "C17_phase3_regression_full",
+      "pass": true,
+      "details": "bit-exact(deterministic+fixed)=1 (worst BER/A/fixed_otfs diff=0); oracle flips=20 within latency-tie-band=1 (max margin 0.0172 band 0.0377 from t-range 8-107 ms); switches_match=1; max mean-ACS delta=0.0084; elapsed=12.7 min"
+    }
+  ]
+}

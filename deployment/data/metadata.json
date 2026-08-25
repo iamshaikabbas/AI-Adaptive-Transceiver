@@ -1,0 +1,59 @@
+{
+  "project": "AI-Adaptive-Transceiver",
+  "schema_version": "1.0",
+  "generation_timestamp": "2026-08-25T21:09:31.488584+00:00",
+  "source_dataset": "final_dataset.csv",
+  "source_checksum": "faa877a248c0f599a87f21dabf4df358",
+  "policy_version": "phase3",
+  "model_version": "metric_models_v2",
+  "master_seed": 20260823,
+  "total_operating_points": 584,
+  "total_csv_rows": 2336,
+  "total_unique_scenarios": 18,
+  "environments": [
+    "HighSpeedRail",
+    "Highway",
+    "Pedestrian",
+    "Urban",
+    "UrbanFast"
+  ],
+  "channel_profiles": [
+    "EPA",
+    "ETU",
+    "EVA"
+  ],
+  "modulations": [
+    4,
+    16,
+    64
+  ],
+  "detectors": [
+    "MRC",
+    "LMMSE"
+  ],
+  "waveforms": [
+    "OTFS",
+    "ODDM"
+  ],
+  "snr_range": [
+    -2.15,
+    22.99
+  ],
+  "speed_range": [
+    0.0,
+    350.0
+  ],
+  "doppler_range": [
+    0.0,
+    3891.58111064511
+  ],
+  "deployment_mode": "precomputed",
+  "matlab_required": false,
+  "known_limitations": [
+    "Continuous speed/snr/doppler values — each frame is a unique operating point",
+    "Detector is waveform-dependent: OTFS uses MRC, ODDM uses LMMSE",
+    "AI predictions only available for ai_adaptive strategy rows",
+    "No latency_ms_modeled data (column fully null in source)",
+    "No uncertainty estimates (columns fully null in source)"
+  ]
+}

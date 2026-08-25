@@ -1,0 +1,12 @@
+{
+  "environment": "Bus",
+  "speed_kmh": 36,
+  "delay_profile": "EVA",
+  "doppler_scale": 1.0,
+  "physical_profile": "Urban",
+  "delay_spread": null,
+  "num_paths": null,
+  "confidence": 0.55,
+  "estimated_mobility": "Medium",
+  "noise_level": "High"
+}

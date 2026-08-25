@@ -1,0 +1,37 @@
+{
+  "model_file": "waveform_selector_2c.joblib",
+  "best_model": "DecisionTreeBal",
+  "classes": [
+    "ODDM",
+    "OTFS"
+  ],
+  "features": [
+    "Environment",
+    "Speed_kmh",
+    "DelayProfile",
+    "DelaySpread",
+    "NumPaths",
+    "DopplerSpread",
+    "Modulation",
+    "SNR_dB"
+  ],
+  "categorical": [
+    "Environment",
+    "DelayProfile"
+  ],
+  "numeric": [
+    "Speed_kmh",
+    "DelaySpread",
+    "NumPaths",
+    "DopplerSpread",
+    "Modulation",
+    "SNR_dB"
+  ],
+  "label_rule": "argmin BER within (CondID,TrialIdx); ties -> PER -> runtime",
+  "selection_metric": "lowest test MacroF1 (regret reported alongside)",
+  "test_accuracy": 0.8518518518518519,
+  "baseline_always_otfs_accuracy": 0.8864197530864197,
+  "best_regret_log10": 0.017677044082520046,
+  "baseline_regret_log10": 0.0017300856649327622,
+  "random_state": 42
+}

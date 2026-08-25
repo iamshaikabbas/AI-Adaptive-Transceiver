@@ -1,0 +1,14 @@
+{
+    "objective": "ACS",
+    "min_confidence": 0.0,
+    "switch_margin_acs": 0.01,
+    "switch_margin_rel": 0.02,
+    "min_dwell_frames": 3,
+    "_doc": {
+        "objective": "'ACS' maximizes predicted Adaptive Communication Score (default); 'BER' minimizes predicted BER",
+        "min_confidence": "optional extra gate on the normalized predicted-objective margin [0..1]; DEFAULT 0.0 = disabled. The margin scale depends on the objective magnitude, so a fixed cutoff like 0.5 can make switching impossible for small-magnitude objectives (e.g. ACS ~0.2-0.9). Anti-chatter is provided by switch_margin_acs/rel + min_dwell_frames; raise this only if switching proves too jittery",
+        "switch_margin_acs": "absolute predicted-objective advantage required to switch away from current waveform (inherited from phase-1 adaptive_config.json default 0.01; strict > comparison)",
+        "switch_margin_rel": "relative predicted-objective advantage required to switch; either absolute OR relative threshold suffices (phase-1 convention)",
+        "min_dwell_frames": "minimum frames between switches (phase-1 default 3)"
+    }
+}

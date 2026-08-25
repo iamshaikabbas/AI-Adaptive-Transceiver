@@ -1,0 +1,154 @@
+[
+  {
+    "generated_at": "23-Aug-2026 14:53:32",
+    "mode": "full",
+    "rng_seed": 2.0260823E+7,
+    "carrier_default_hz": 4.0E+9,
+    "bandwidth_hz": 480000,
+    "objective": "ACS",
+    "tie_rules": {
+      "acs_abs": 0.005,
+      "ber_relative": 0.1
+    },
+    "nTrials_per_condition": 3,
+    "combos": "OTFS (MRC)",
+    "axes": {
+      "snr_train": [
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20
+      ],
+      "snr_test": [
+        -3,
+        2,
+        7,
+        12,
+        17,
+        22
+      ],
+      "speed_train": [
+        0,
+        20,
+        60,
+        100,
+        150,
+        200,
+        300
+      ],
+      "speed_test": [
+        10,
+        40,
+        80,
+        120,
+        250,
+        350
+      ],
+      "profiles": [
+        "EPA",
+        "EVA",
+        "ETU"
+      ],
+      "mods_main": [
+        4,
+        16
+      ],
+      "qam64_slice": true,
+      "carrier_slice": true
+    },
+    "counts": {
+      "conditions": 579,
+      "train": 266,
+      "val": 67,
+      "test": 246,
+      "rows": 1158
+    },
+    "pairing": "per trial: identical channel realization, payload bits and noise seed across waveforms; only the waveform differs",
+    "feature_source": "delay/Doppler/path features come from one probe channel realization per condition (gen_channel_params_flex)",
+    "acs_rule": "ACS recomputed from aggregated metrics via compute_acs(); tp_cap=N_bits/frame_T (frame_T includes ODDM CP), se_cap=log2(M)",
+    "label_rule": "best_waveform = argmax ACS (configurable) or argmin BER; ties recorded as tie/tie_<waveform>, never fabricated",
+    "files": {
+      "dataset": "phase2_dataset.csv",
+      "performance_map": "phase2_performance_map.csv"
+    }
+  },
+  {
+    "generated_at": "23-Aug-2026 14:53:32",
+    "mode": "full",
+    "rng_seed": 2.0260823E+7,
+    "carrier_default_hz": 4.0E+9,
+    "bandwidth_hz": 480000,
+    "objective": "ACS",
+    "tie_rules": {
+      "acs_abs": 0.005,
+      "ber_relative": 0.1
+    },
+    "nTrials_per_condition": 3,
+    "combos": "ODDM (LMMSE)",
+    "axes": {
+      "snr_train": [
+        -10,
+        -5,
+        0,
+        5,
+        10,
+        15,
+        20
+      ],
+      "snr_test": [
+        -3,
+        2,
+        7,
+        12,
+        17,
+        22
+      ],
+      "speed_train": [
+        0,
+        20,
+        60,
+        100,
+        150,
+        200,
+        300
+      ],
+      "speed_test": [
+        10,
+        40,
+        80,
+        120,
+        250,
+        350
+      ],
+      "profiles": [
+        "EPA",
+        "EVA",
+        "ETU"
+      ],
+      "mods_main": [
+        4,
+        16
+      ],
+      "qam64_slice": true,
+      "carrier_slice": true
+    },
+    "counts": {
+      "conditions": 579,
+      "train": 266,
+      "val": 67,
+      "test": 246,
+      "rows": 1158
+    },
+    "pairing": "per trial: identical channel realization, payload bits and noise seed across waveforms; only the waveform differs",
+    "feature_source": "delay/Doppler/path features come from one probe channel realization per condition (gen_channel_params_flex)",
+    "acs_rule": "ACS recomputed from aggregated metrics via compute_acs(); tp_cap=N_bits/frame_T (frame_T includes ODDM CP), se_cap=log2(M)",
+    "label_rule": "best_waveform = argmax ACS (configurable) or argmin BER; ties recorded as tie/tie_<waveform>, never fabricated",
+    "files": {
+      "dataset": "phase2_dataset.csv",
+      "performance_map": "phase2_performance_map.csv"
+    }
+  }
+]

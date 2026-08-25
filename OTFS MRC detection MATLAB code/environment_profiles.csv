@@ -1,0 +1,5 @@
+Environment,SpeedMin,SpeedMax,DelayProfile,DopplerScale,Category
+Pedestrian,0,5,EPA,1,LowMobility
+Urban,10,50,EVA,1,MediumMobility
+Highway,60,120,ETU,1,HighMobility
+HighSpeedRail,200,300,ETU,1.5,VeryHighMobility

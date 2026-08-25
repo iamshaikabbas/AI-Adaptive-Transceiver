@@ -1,0 +1,18 @@
+{
+  "_comment": "Adaptive Communication Score (ACS) weights. Must sum to 1 (normalized in code). Shared by MATLAB compute_acs.m and Python acs.py -- edit here only.",
+  "w_ber": 0.25,
+  "w_throughput": 0.20,
+  "w_se": 0.10,
+  "w_cqi": 0.15,
+  "w_latency": 0.10,
+  "w_recovery": 0.20,
+  "_normalization": {
+    "BER_score": "clamp(-log10(max(BER,1e-6))/6, 0, 1)   [1e-6 -> 1.0]",
+    "Throughput_score": "min(1, Throughput_bps / (N_bits/frame_T))",
+    "SE_score": "min(1, SE_bps_per_Hz / log2(M))",
+    "CQI_score": "CQI/15",
+    "Latency_score": "exp(-Latency_ms/200)",
+    "Recovery_score": "RecoveryRate (=1-PER)",
+    "note": "For single-frame transmission Throughput_score == Recovery_score; kept separate per spec for future multi-frame/HARQ extensions."
+  }
+}

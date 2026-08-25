@@ -1,0 +1,90 @@
+{
+  "feature_cols_metric": [
+    "Environment",
+    "DelayProfile",
+    "Modulation",
+    "Category",
+    "Speed_kmh",
+    "DelaySpread",
+    "NumPaths",
+    "DopplerSpread",
+    "SNR_dB",
+    "Detector"
+  ],
+  "feature_cols_detector": [
+    "Environment",
+    "DelayProfile",
+    "Modulation",
+    "Category",
+    "Speed_kmh",
+    "DelaySpread",
+    "NumPaths",
+    "DopplerSpread",
+    "SNR_dB"
+  ],
+  "metric_targets": [
+    "BER",
+    "SER",
+    "PER",
+    "Throughput_bps",
+    "SpectralEfficiency_bps_per_Hz",
+    "CQI"
+  ],
+  "log_scale_targets": [
+    "BER",
+    "SER",
+    "PER"
+  ],
+  "regressor_candidates": [
+    "RandomForest",
+    "GradientBoosting",
+    "DecisionTree"
+  ],
+  "metric_eval": {
+    "BER": {
+      "best_model": "RandomForest",
+      "r2": 0.9837832992030798,
+      "mae": 0.01153039991591655,
+      "n_test": 1008
+    },
+    "SER": {
+      "best_model": "RandomForest",
+      "r2": 0.9874559562095715,
+      "mae": 0.022214711703870384,
+      "n_test": 1008
+    },
+    "PER": {
+      "best_model": "RandomForest",
+      "r2": 0.9438316526168615,
+      "mae": 0.028955938523323434,
+      "n_test": 1008
+    },
+    "Throughput_bps": {
+      "best_model": "RandomForest",
+      "r2": 0.9345297120490403,
+      "mae": 82118.43253968254,
+      "n_test": 1008
+    },
+    "SpectralEfficiency_bps_per_Hz": {
+      "best_model": "RandomForest",
+      "r2": 0.9345524708926775,
+      "mae": 0.08552449156746031,
+      "n_test": 1008
+    },
+    "CQI": {
+      "best_model": "RandomForest",
+      "r2": 0.9725337592378309,
+      "mae": 0.35495535714285714,
+      "n_test": 1008
+    }
+  },
+  "detector_eval": {
+    "accuracy": 0.8511904761904762,
+    "macro_f1": 0.5266300783542163,
+    "n_test": 336
+  },
+  "dataset_rows": 5040,
+  "dataset_missing_values": 0,
+  "dataset_duplicate_rows": 0,
+  "trained_rows": 5040
+}

@@ -1,0 +1,33 @@
+OTFS AI PIPELINE -- DATASET REPORT
+============================================================
+Generated: 2026-08-08 00:37:08.170140
+
+Rows                : 5040
+Columns             : 23
+Missing values      : 0
+Duplicate rows      : 0
+
+Unique Environments (4): ['HighSpeedRail', 'Highway', 'Pedestrian', 'Urban']
+Unique Modulations  (3): ['16QAM', '64QAM', 'QPSK']
+Unique Detectors    (3): ['LMMSE', 'MPA', 'MRC']
+Unique DelayProfiles(3): ['EPA', 'ETU', 'EVA']
+
+------------------------------------------------------------
+Per-numeric-column summary (mean / std / min / max)
+------------------------------------------------------------
+                                  mean      std       min      max
+Speed_kmh                       92.875  97.0177         0      283
+DelaySpread                          3  2.12153         0        5
+NumPaths                           8.5 0.866111         7        9
+DopplerSpread                  1.91947  2.31623         0  6.71277
+SNR_dB                              15   10.001         0       30
+BER                           0.196991 0.156624         0 0.466884
+SER                           0.493454  0.38585         0 0.984297
+PER                           0.820278 0.338871         0        1
+EVM_percent                    53.2242  35.1384         0  125.933
+SINR_est_dB                    21.4332  43.6143  -2.00282      160
+CQI                            7.62401  4.36994         3       15
+Throughput_bps                  473415   927767         0 5.22e+06
+SpectralEfficiency_bps_per_Hz 0.493141 0.966424         0   5.4375
+Runtime_sec                   0.576024 0.611024 0.0323945  8.48218
+AvgIterations                  5.20123  4.16004         1     19.9
