@@ -74,7 +74,6 @@ app.add_middleware(
         "http://localhost:5174",
         "http://127.0.0.1:5173",
         "http://127.0.0.1:5174",
-        "https://ai-adaptive-transceiver-73zjb4fhm-iamshaikabbas-projects.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],

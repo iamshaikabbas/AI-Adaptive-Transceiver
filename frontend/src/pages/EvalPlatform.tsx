@@ -936,7 +936,7 @@ export default function EvalPlatform() {
                                 Generalization
                               </span>
                               <span className="text-[10px] text-text-muted">
-                                {selectedRunData.report.interior.model_estimates ?? 0} model estimates
+                                {selectedRunData.report.interior?.model_estimates ?? 0} model estimates
                               </span>
                             </div>
                             <p className="text-[10px] text-text-muted">
@@ -951,12 +951,12 @@ export default function EvalPlatform() {
                                 Boundary Robustness
                               </span>
                               <span className="text-[10px] text-text-muted">
-                                {selectedRunData.report.boundary.model_estimates ?? 0} model estimates
+                                {selectedRunData.report.boundary?.model_estimates ?? 0} model estimates
                               </span>
                             </div>
                             <p className="text-[10px] text-text-muted">
                               BOUNDARY — no fabricated ground truth. {" "}
-                              {selectedRunData.report.boundary.rejected ?? 0} rejected as out-of-domain.
+                              {selectedRunData.report.boundary?.rejected ?? 0} rejected as out-of-domain.
                             </p>
                           </div>
 
@@ -967,17 +967,17 @@ export default function EvalPlatform() {
                                 Safety
                               </span>
                               <span className="text-[10px] text-text-muted">
-                                {selectedRunData.report.ood.total ?? 0} OOD inputs
+                                {selectedRunData.report.ood?.total ?? 0} OOD inputs
                               </span>
                             </div>
                             <div className="text-[12px] font-mono">
-                              {selectedRunData.report.ood.rejected} / {selectedRunData.report.ood.total} rejected
+                              {selectedRunData.report.ood?.rejected ?? 0} / {selectedRunData.report.ood?.total ?? 0} rejected
                             </div>
                             <div className="text-[12px] font-mono">
-                              OOD rejection rate: {(selectedRunData.report.ood.rejection_rate * 100).toFixed(0)}%
+                              OOD rejection rate: {((selectedRunData.report.ood?.rejection_rate ?? 0) * 100).toFixed(0)}%
                             </div>
                             <p className="text-[10px] text-text-muted mt-1">
-                              Fabricated predictions: {selectedRunData.report.ood.fabricated_predictions} (must be 0)
+                              Fabricated predictions: {selectedRunData.report.ood?.fabricated_predictions ?? 0} (must be 0)
                             </p>
                           </div>
 

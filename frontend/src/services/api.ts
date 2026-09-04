@@ -26,14 +26,14 @@ import type {
 /*
  * API base URL
  *
- * Local development:
- *   VITE_API_BASE_URL is normally unset.
- *   BASE becomes "" and Vite's /api proxy is used.
+ * Local development (localhost-only deployment):
+ *   BASE is "" and Vite's /api proxy routes requests to the local
+ *   FastAPI backend at http://127.0.0.1:8000, forwarded by
+ *   frontend/vite.config.ts.
  *
- * Production:
- *   Vercel provides VITE_API_BASE_URL through its environment variables.
- *   Example:
- *   https://ai-adaptive-transceiver-1.onrender.com
+ * Frontend:  http://localhost:5173
+ * Backend:   http://127.0.0.1:8000
+ * Swagger:   http://127.0.0.1:8000/docs
  */
 const BASE = "";
 
