@@ -616,8 +616,7 @@ export default function EvalPlatform() {
   /* WebSocket for live eval progress */
   const connectWs = useCallback(() => {
     if (wsRef.current) return;
-    const proto = window.location.protocol === "https:" ? "wss:" : "ws:";
-    const wsUrl = `${proto}//${window.location.host}/ws/evals`;
+    const wsUrl = "ws://127.0.0.1:8000/ws/evals";
     const ws = new WebSocket(wsUrl);
     wsRef.current = ws;
 

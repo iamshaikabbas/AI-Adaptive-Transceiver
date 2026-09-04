@@ -10,8 +10,7 @@ let listeners: WSCallback[] = [];
 let intentionalClose = false;
 
 function getWsUrl(): string {
-  const proto = window.location.protocol === "https:" ? "wss:" : "ws:";
-  return `${proto}//${window.location.host}/ws/simulation`;
+  return "ws://127.0.0.1:8000/ws/simulation";
 }
 
 function connect() {

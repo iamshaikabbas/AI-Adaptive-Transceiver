@@ -23,19 +23,26 @@ import type {
   RegressionComparisonData,
 } from "../types/api";
 
+export interface GraphEntry {
+  graph_id: number;
+  title: string;
+  filename: string;
+  category: string;
+  description: string;
+  interpretation: string;
+}
+
 /*
  * API base URL
  *
- * Local development (localhost-only deployment):
- *   BASE is "" and Vite's /api proxy routes requests to the local
- *   FastAPI backend at http://127.0.0.1:8000, forwarded by
- *   frontend/vite.config.ts.
+ * Localhost-only deployment: all REST calls go directly to the local
+ * FastAPI backend. No proxy, no cloud, no environment-based fallback.
  *
  * Frontend:  http://localhost:5173
  * Backend:   http://127.0.0.1:8000
  * Swagger:   http://127.0.0.1:8000/docs
  */
-const BASE = "";
+const BASE = "http://127.0.0.1:8000";
 
 async function get<T>(path: string): Promise<T> {
   const res = await fetch(`${BASE}${path}`);
@@ -157,6 +164,14 @@ export const api = {
       "/api/custom/evaluate",
       req
     ),
+
+  // ── Graphs (Analysis page) ────────────────────────────────────────────────
+
+  graphsIndex: () =>
+    get<GraphEntry[]>("/api/graphs/index"),
+
+  graphFileUrl: (filename: string) =>
+    `${BASE}/api/graphs/${filename}`,
 
   // ── Evals Platform ─────────────────────────────────────────────────────────
 
