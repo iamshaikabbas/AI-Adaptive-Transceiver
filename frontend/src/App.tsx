@@ -4,6 +4,7 @@ import Sidebar from "./components/Sidebar";
 import Overview from "./pages/Overview";
 import DigitalTwinPage from "./pages/DigitalTwinPage";
 import CustomEvaluation from "./pages/CustomEvaluation";
+import EvalPlatform from "./pages/EvalPlatform";
 import Analysis from "./pages/Analysis";
 import About from "./pages/About";
 import { useSimulation } from "./hooks/useSimulation";
@@ -20,6 +21,8 @@ export default function App() {
         return <DigitalTwinPage />;
       case "custom-eval":
         return <CustomEvaluation />;
+      case "evals-platform":
+        return <EvalPlatform />;
       case "analysis":
         return <Analysis />;
       case "about":

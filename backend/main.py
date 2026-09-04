@@ -269,6 +269,212 @@ async def websocket_simulation(websocket: WebSocket):
         await ws_manager.disconnect(websocket)
 
 
+# ── Evals Platform ──────────────────────────────────────────────────────────
+
+_eval_runner = None
+
+
+def _get_eval_runner():
+    global _eval_runner
+    if _eval_runner is None:
+        from .evals.runner import EvalRunner
+        _eval_runner = EvalRunner()
+    return _eval_runner
+
+
+@app.get("/api/evals/golden-dataset", tags=["Evals Platform"])
+async def evals_golden_dataset():
+    """Return the Golden Dataset manifest with integrity verification."""
+    from .evals.golden_dataset import get_golden_dataset
+    ds = get_golden_dataset()
+    return ds.build_manifest().model_dump()
+
+
+@app.get("/api/evals/suites", tags=["Evals Platform"])
+async def evals_suites():
+    """List available evaluation suites."""
+    return [
+        {"id": "FULL_REGRESSION", "name": "Full Regression", "description": "EXACT + INTERIOR + BOUNDARY + OOD cases"},
+        {"id": "PREDICTION_ACCURACY", "name": "Prediction Accuracy", "description": "EXACT cases only — compare AI prediction vs golden ground truth"},
+        {"id": "OOD_SAFETY", "name": "OOD Safety", "description": "Out-of-domain cases — verify AI correctly rejects invalid inputs"},
+        {"id": "ROBUSTNESS", "name": "Robustness", "description": "BOUNDARY + OOD cases — test near-boundary and invalid behavior"},
+    ]
+
+
+@app.post("/api/evals/run", tags=["Evals Platform"])
+async def evals_start_run(suite: str = "FULL_REGRESSION"):
+    """Start a new evaluation run."""
+    from .evals.schemas import EvalSuite, EvalRunConfig
+
+    suite_map = {
+        "FULL_REGRESSION": EvalSuite.FULL_REGRESSION,
+        "PREDICTION_ACCURACY": EvalSuite.PREDICTION_ACCURACY,
+        "OOD_SAFETY": EvalSuite.OOD_SAFETY,
+        "ROBUSTNESS": EvalSuite.ROBUSTNESS,
+    }
+
+    if suite not in suite_map:
+        raise HTTPException(status_code=400, detail=f"Invalid suite: {suite}. Valid: {list(suite_map.keys())}")
+
+    runner = _get_eval_runner()
+    if runner.is_running():
+        raise HTTPException(status_code=409, detail="An evaluation run is already active")
+
+    config = EvalRunConfig(suite=suite_map[suite])
+
+    # Capture the current asyncio event loop so the background eval thread can
+    # schedule async WebSocket broadcasts onto it (the established
+    # sync->async bridge pattern used by SimulationManager._broadcast_sync).
+    import asyncio
+    main_loop = asyncio.get_running_loop()
+
+    def on_progress(summary, case_result, graph_data):
+        # Synchronous callback invoked from EvalRunner's background thread.
+        # Bridge to the async WebSocket broadcast on the main event loop.
+        import asyncio as aio
+        event = {
+            "type": "eval_progress",
+            "run_id": summary.run_id,
+            "timestamp": _eval_now_iso(),
+            "progress_pct": summary.progress_pct,
+            "completed_cases": summary.completed_cases,
+            "total_cases": summary.total_cases,
+            "elapsed_seconds": round(summary.elapsed_seconds, 3),
+            "current_case_id": summary.current_case_id,
+            "current_case_type": summary.current_case_type.value if summary.current_case_type else None,
+            "status": summary.status.value,
+            "passed": summary.passed,
+            "failed": summary.failed,
+            "rejected": summary.rejected,
+            "unavailable": summary.unavailable,
+        }
+        if case_result is not None:
+            event["case_result"] = case_result.model_dump() if hasattr(case_result, 'model_dump') else case_result
+        if graph_data:
+            event["graph_data"] = {k: v[-1] if v else None for k, v in graph_data.items()}
+            event["graph_data_full"] = graph_data
+
+        if main_loop and not main_loop.is_closed():
+            try:
+                aio.run_coroutine_threadsafe(ws_manager.broadcast(event), main_loop)
+            except Exception:
+                pass
+
+    try:
+        summary = runner.start_run(config, on_progress=on_progress)
+        return summary.model_dump()
+    except ValueError as e:
+        raise HTTPException(status_code=409, detail=str(e))
+
+
+@app.post("/api/evals/stop", tags=["Evals Platform"])
+async def evals_stop_run():
+    """Stop the active evaluation run."""
+    runner = _get_eval_runner()
+    if not runner.is_running():
+        raise HTTPException(status_code=409, detail="No active evaluation run")
+    runner.stop_run()
+    return {"status": "stopping"}
+
+
+@app.get("/api/evals/runs", tags=["Evals Platform"])
+async def evals_list_runs():
+    """List all completed evaluation runs."""
+    runner = _get_eval_runner()
+    return runner.list_runs()
+
+
+@app.get("/api/evals/runs/{run_id}", tags=["Evals Platform"])
+async def evals_get_run(run_id: str):
+    """Get full evaluation run data."""
+    runner = _get_eval_runner()
+    run_data = runner.get_run(run_id)
+    if run_data is None:
+        raise HTTPException(status_code=404, detail=f"Run {run_id} not found")
+    return run_data
+
+
+@app.get("/api/evals/runs/{run_id}/cases", tags=["Evals Platform"])
+async def evals_get_cases(run_id: str):
+    """Get case results for a run."""
+    runner = _get_eval_runner()
+    run_data = runner.get_run(run_id)
+    if run_data is None:
+        raise HTTPException(status_code=404, detail=f"Run {run_id} not found")
+    return run_data.get("cases", [])
+
+
+@app.get("/api/evals/runs/{run_id}/report", tags=["Evals Platform"])
+async def evals_get_report(run_id: str):
+    """Get evaluation report for a run."""
+    runner = _get_eval_runner()
+    run_data = runner.get_run(run_id)
+    if run_data is None:
+        raise HTTPException(status_code=404, detail=f"Run {run_id} not found")
+    return run_data.get("report", {})
+
+
+@app.get("/api/evals/runs/{run_id}/graphs", tags=["Evals Platform"])
+async def evals_get_graphs(run_id: str):
+    """Get graph data for a run."""
+    runner = _get_eval_runner()
+    run_data = runner.get_run(run_id)
+    if run_data is None:
+        raise HTTPException(status_code=404, detail=f"Run {run_id} not found")
+    return run_data.get("graph_data", {})
+
+
+@app.get("/api/evals/compare/{run_a}/{run_b}", tags=["Evals Platform"])
+async def evals_compare_runs(run_a: str, run_b: str):
+    """Compare two completed evaluation runs."""
+    runner = _get_eval_runner()
+    data_a = runner.get_run(run_a)
+    data_b = runner.get_run(run_b)
+    if data_a is None:
+        raise HTTPException(status_code=404, detail=f"Run {run_a} not found")
+    if data_b is None:
+        raise HTTPException(status_code=404, detail=f"Run {run_b} not found")
+
+    from .evals.report import compare_runs
+    from .evals.schemas import EvalRunSummary
+
+    summary_a = EvalRunSummary(**data_a.get("summary", {}))
+    summary_b = EvalRunSummary(**data_b.get("summary", {}))
+    report_a = data_a.get("report", {})
+    report_b = data_b.get("report", {})
+
+    comparison = compare_runs(summary_a, summary_b, report_a, report_b)
+    return comparison.model_dump()
+
+
+@app.get("/api/evals/status", tags=["Evals Platform"])
+async def evals_status():
+    """Get current evaluation status."""
+    runner = _get_eval_runner()
+    return {
+        "running": runner.is_running(),
+        "active_run_id": runner.get_active_run_id(),
+    }
+
+
+def _eval_now_iso():
+    from datetime import datetime, timezone
+    return datetime.now(timezone.utc).isoformat()
+
+
+@app.websocket("/ws/evals")
+async def websocket_evals(websocket: WebSocket):
+    """WebSocket for live evaluation progress updates."""
+    await ws_manager.connect(websocket)
+    try:
+        while True:
+            data = await websocket.receive_text()
+    except WebSocketDisconnect:
+        await ws_manager.disconnect(websocket)
+    except Exception:
+        await ws_manager.disconnect(websocket)
+
+
 # ── Phase 11: Custom Evaluation (Deployment Mode) ───────────────────────────
 
 @app.get("/api/custom/schema", response_model=CustomSchemaResponse, tags=["Custom Evaluation"])

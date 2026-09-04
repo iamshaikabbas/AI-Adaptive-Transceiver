@@ -46,7 +46,8 @@ class AIEngineV3(AIEngineV2):
     """v2 predictions + banded-confidence decision policy."""
 
     def __init__(self, config_file=None):
-        super().__init__(config_file=config_file or CONFIG_FILE)
+        super().__init__(config_file=config_file or CONFIG_FILE,
+                         model_version="v2")
         for k, v in V3_POLICY_DEFAULTS.items():
             self.policy.setdefault(k, v)
 

@@ -10,6 +10,7 @@ const SECTIONS = [
     label: "EVALUATION",
     items: [
       { id: "custom-eval", label: "Custom Eval" },
+      { id: "evals-platform", label: "Evals Platform" },
     ],
   },
   {

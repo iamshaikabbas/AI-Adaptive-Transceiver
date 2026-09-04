@@ -1,0 +1,10 @@
+{
+  "id": "B1",
+  "description": "floor->1e-6 (re-cap only true-zero rows)",
+  "floor": 1e-06,
+  "n_estimators": 300,
+  "min_samples_leaf": 1,
+  "zero_row_weight": 1.0,
+  "seed": 42,
+  "artifact_sha256": "19e0207fa13d027889f65e980116a2698c1725590d8ae01c404359e59dfb2cdf"
+}

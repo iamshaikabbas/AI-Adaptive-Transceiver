@@ -6,21 +6,24 @@ No MATLAB required at runtime.
 Provides:
   - Exact lookup (dataset row retrieval)
   - Nearest-neighbor retrieval (normalized distance)
-  - Phase-3 RF model regression (OTFS + ODDM)
+  - RF model regression (OTFS + ODDM) via shared model registry
   - RF uncertainty estimation (tree dispersion)
   - Neighborhood consistency analysis
   - Coverage / OOD detection
   - Confidence classification
-  - Phase-3 AI waveform decision
+  - AI waveform decision
 
 Source: final_dataset.csv (Phase 6, frozen checksum faa877a248c0f599a87f21dabf4df358)
-Models: metric_models_v2 (Phase 3, frozen)
+Models: versioned via otfs_ai_pipeline/model_registry.py
+        (default MODEL_VERSION=v4-b1; MODEL_VERSION=v2 for rollback;
+        missing active-version artifacts fail loudly, never fall back)
 Policy: adaptive_config_v2.json (Phase 3, canonical)
 """
 
 from __future__ import annotations
 
 import csv
+import importlib.util
 import json
 import math
 import os
@@ -56,6 +59,25 @@ _DEFAULT_POLICY = {
     "switch_margin_rel": 0.02,
     "min_dwell_frames": 3,
 }
+
+# ---------------------------------------------------------------------------
+# Model versioning -- shared source of truth:
+# OTFS MRC detection MATLAB code/otfs_ai_pipeline/model_registry.py
+# ---------------------------------------------------------------------------
+_AI_PIPELINE_DIR = _MATLAB_DIR / "otfs_ai_pipeline"
+_MODEL_REGISTRY = None
+
+
+def _model_registry():
+    """Import the shared model_registry module (resolved by absolute path)."""
+    global _MODEL_REGISTRY
+    if _MODEL_REGISTRY is None:
+        spec = importlib.util.spec_from_file_location(
+            "model_registry", _AI_PIPELINE_DIR / "model_registry.py")
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        _MODEL_REGISTRY = module
+    return _MODEL_REGISTRY
 
 # ---------------------------------------------------------------------------
 # Internal data structures
@@ -214,6 +236,7 @@ class DeploymentDataService:
         # Phase-3 models
         self._models: dict[str, Any] = {}
         self._meta: dict = {}
+        self.model_version: str = ""
         self._policy: dict = dict(_DEFAULT_POLICY)
         # Nearest-neighbor distance distribution (for OOD thresholds)
         self._nn_distances_sorted: list[float] = []
@@ -294,12 +317,19 @@ class DeploymentDataService:
         self._group_keys.sort()
 
     def _load_models(self):
-        """Load Phase-3 RF regressors and metadata."""
+        """Load active-version regressors and metadata.
+
+        Artifacts are resolved by the shared model_registry (MODEL_VERSION,
+        default v4-b1). A missing artifact for the active version raises
+        explicitly -- there is no silent fallback to metric_models_v2.
+        """
+        registry = _model_registry()
+        self.model_version = registry.get_active_model_version()
+        artifacts = registry.validate_active_version()
         with open(_META_PATH, encoding="utf-8") as f:
             self._meta = json.load(f)
-        for target_name, target_info in self._meta["targets"].items():
-            model_path = _MODELS_DIR / target_info["file"]
-            self._models[target_name] = joblib.load(str(model_path))
+        for target_name in self._meta["targets"].keys():
+            self._models[target_name] = joblib.load(artifacts[target_name])
 
     def _load_config(self):
         """Load Phase-3 adaptive config."""
@@ -454,7 +484,7 @@ class DeploymentDataService:
                 "OOD": "Outside validated/model-supported region",
             },
             "policy_version": "phase3",
-            "model_version": "metric_models_v2",
+            "model_version": self.model_version,
         }
 
     # ------------------------------------------------------------------

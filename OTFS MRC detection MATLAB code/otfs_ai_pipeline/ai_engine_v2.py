@@ -32,6 +32,11 @@ import joblib
 import numpy as np
 import pandas as pd
 
+from model_registry import (
+    get_active_model_version,
+    validate_active_version,
+)
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 MODELS_DIR = os.path.join(HERE, "models", "metric_models_v2")
 CONFIG_FILE = os.path.join(HERE, "..", "adaptive_config_v2.json")
@@ -48,14 +53,15 @@ DEFAULT_POLICY = {
 
 
 class AIEngineV2:
-    def __init__(self, config_file=None):
+    def __init__(self, config_file=None, model_version=None):
         self.meta = json.load(open(
             os.path.join(MODELS_DIR, "metric_models_v2_meta.json")))
         self.features = self.meta["features_cat"] + self.meta["features_num"]
+        self.model_version = get_active_model_version(model_version)
+        artifacts = validate_active_version(self.model_version)
         self.targets = {}
-        for t, info in self.meta["targets"].items():
-            self.targets[t] = joblib.load(
-                os.path.join(MODELS_DIR, info["file"]))
+        for t in self.meta["targets"].keys():
+            self.targets[t] = joblib.load(artifacts[t])
         self.lat_ms = {r["waveform"]: float(r["latency_median_ms"])
                        for r in self.meta["latency_lookup_ms"]}
         self.policy = dict(DEFAULT_POLICY)

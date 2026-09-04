@@ -13,6 +13,14 @@ import type {
   CustomEvaluationRequest,
   CustomEvaluationResponse,
   CustomSchemaResponse,
+  GoldenDatasetManifest,
+  EvalSuiteInfo,
+  EvalRunSummaryData,
+  EvalRunFullData,
+  EvalCaseResultData,
+  EvalReport,
+  EvalGraphData,
+  RegressionComparisonData,
 } from "../types/api";
 
 /*
@@ -27,9 +35,7 @@ import type {
  *   Example:
  *   https://ai-adaptive-transceiver-1.onrender.com
  */
-const BASE =
-  import.meta.env.VITE_API_BASE_URL ||
-  "https://ai-adaptive-transceiver-1.onrender.com";
+const BASE = "";
 
 async function get<T>(path: string): Promise<T> {
   const res = await fetch(`${BASE}${path}`);
@@ -151,4 +157,39 @@ export const api = {
       "/api/custom/evaluate",
       req
     ),
+
+  // ── Evals Platform ─────────────────────────────────────────────────────────
+
+  evalsGoldenDataset: () =>
+    get<GoldenDatasetManifest>("/api/evals/golden-dataset"),
+
+  evalsSuites: () =>
+    get<EvalSuiteInfo[]>("/api/evals/suites"),
+
+  evalsStartRun: (suite: string = "FULL_REGRESSION") =>
+    post<EvalRunSummaryData>(`/api/evals/run?suite=${suite}`),
+
+  evalsStopRun: () =>
+    post<{ status: string }>("/api/evals/stop"),
+
+  evalsListRuns: () =>
+    get<EvalRunSummaryData[]>("/api/evals/runs"),
+
+  evalsGetRun: (runId: string) =>
+    get<EvalRunFullData>(`/api/evals/runs/${runId}`),
+
+  evalsGetCases: (runId: string) =>
+    get<EvalCaseResultData[]>(`/api/evals/runs/${runId}/cases`),
+
+  evalsGetReport: (runId: string) =>
+    get<EvalReport>(`/api/evals/runs/${runId}/report`),
+
+  evalsGetGraphs: (runId: string) =>
+    get<EvalGraphData>(`/api/evals/runs/${runId}/graphs`),
+
+  evalsCompare: (runA: string, runB: string) =>
+    get<RegressionComparisonData>(`/api/evals/compare/${runA}/${runB}`),
+
+  evalsStatus: () =>
+    get<{ running: boolean; active_run_id: string | null }>("/api/evals/status"),
 };
