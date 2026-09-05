@@ -412,6 +412,22 @@ function CaseTable({ cases }: { cases: EvalRunFullData["cases"] }) {
 
 /* ── Run History ──────────────────────────────────────────────────────────── */
 
+const VALID_RUN_STATUSES = ["RUNNING", "PENDING", "COMPLETED", "FAILED", "STOPPED"];
+
+function isLegacyRun(r: EvalRunSummaryData | null | undefined): boolean {
+  return (
+    r == null ||
+    typeof r.run_id !== "string" ||
+    !VALID_RUN_STATUSES.includes(r.status)
+  );
+}
+
+function formatElapsed(seconds: unknown): string {
+  return typeof seconds === "number" && Number.isFinite(seconds)
+    ? `${seconds.toFixed(1)}s`
+    : "—";
+}
+
 function RunHistory({
   runs,
   onSelect,
@@ -432,38 +448,43 @@ function RunHistory({
         </div>
       ) : (
         <div className="divide-y divide-border-subtle">
-          {runs.map((r) => (
-            <button
-              key={r.run_id}
-              onClick={() => onSelect(r.run_id)}
-              className="w-full text-left px-3 py-2 hover:bg-surface-alt transition-colors"
-            >
-              <div className="flex items-center justify-between">
-                <span className="text-[11px] font-mono font-medium">
-                  {r.run_id}
-                </span>
-                <span
-                  className={`text-[10px] font-mono font-semibold ${
-                    r.status === "COMPLETED"
-                      ? "text-black"
-                      : r.status === "FAILED"
-                      ? "text-gold"
-                      : "text-text-muted"
-                  }`}
-                >
-                  {r.status}
-                </span>
-              </div>
-              <div className="flex items-center gap-3 mt-1 text-[10px] text-text-muted">
-                <span>{r.suite}</span>
-                <span>{r.total_cases} cases</span>
-                <span>
-                  {r.passed}P / {r.failed}F / {r.rejected}R
-                </span>
-                <span>{r.elapsed_seconds.toFixed(1)}s</span>
-              </div>
-            </button>
-          ))}
+          {runs.map((r, idx) => {
+            const legacy = isLegacyRun(r);
+            const statusText = legacy ? "LEGACY" : r.status;
+            const statusClass = legacy
+              ? "text-text-muted"
+              : r.status === "COMPLETED"
+              ? "text-black"
+              : r.status === "FAILED"
+              ? "text-gold"
+              : "text-text-muted";
+            return (
+              <button
+                key={r.run_id ?? `legacy-${idx}`}
+                onClick={() => onSelect(r.run_id)}
+                className="w-full text-left px-3 py-2 hover:bg-surface-alt transition-colors"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-[11px] font-mono font-medium">
+                    {r.run_id}
+                  </span>
+                  <span
+                    className={`text-[10px] font-mono font-semibold ${statusClass}`}
+                  >
+                    {statusText}
+                  </span>
+                </div>
+                <div className="flex items-center gap-3 mt-1 text-[10px] text-text-muted">
+                  <span>{r.suite ?? "—"}</span>
+                  <span>{r.total_cases ?? "—"} cases</span>
+                  <span>
+                    {r.passed ?? 0}P / {r.failed ?? 0}F / {r.rejected ?? 0}R
+                  </span>
+                  <span>{formatElapsed(r.elapsed_seconds)}</span>
+                </div>
+              </button>
+            );
+          })}
         </div>
       )}
     </div>
@@ -776,7 +797,7 @@ export default function EvalPlatform() {
               <div className="grid grid-cols-6 gap-4">
                 <StatBlock
                   label="Rows"
-                  value={manifest.total_rows.toLocaleString()}
+                  value={manifest.row_count.toLocaleString()}
                 />
                 <StatBlock
                   label="Scenarios"
@@ -784,11 +805,11 @@ export default function EvalPlatform() {
                 />
                 <StatBlock
                   label="Fixed OTFS"
-                  value={manifest.fixed_otfs_count}
+                  value={manifest.fixed_otfs_count ?? "—"}
                 />
                 <StatBlock
                   label="Oracle"
-                  value={manifest.oracle_count}
+                  value={manifest.oracle_count ?? "—"}
                 />
                 <StatBlock label="SNR Range" value={`${manifest.snr_range[0]}–${manifest.snr_range[1]}`} />
                 <StatBlock label="Speed Range" value={`${manifest.speed_range[0]}–${manifest.speed_range[1]}`} />
@@ -869,7 +890,7 @@ export default function EvalPlatform() {
                 <StatBlock label="Unavail" value={activeRun.unavailable} />
                 <StatBlock
                   label="Elapsed"
-                  value={`${activeRun.elapsed_seconds.toFixed(1)}s`}
+                  value={formatElapsed(activeRun.elapsed_seconds)}
                 />
                 <StatBlock
                   label="Current"
@@ -1011,7 +1032,7 @@ export default function EvalPlatform() {
                             <StatBlock label="Fail" value={selectedRunData.report.failed} />
                             <StatBlock label="Rejected" value={selectedRunData.report.rejected} />
                             <StatBlock label="Unavail" value={selectedRunData.report.unavailable} />
-                            <StatBlock label="Time" value={`${selectedRunData.report.elapsed_seconds.toFixed(1)}s`} />
+                            <StatBlock label="Time" value={formatElapsed(selectedRunData.report.elapsed_seconds)} />
                           </div>
                           {/* By Case Type breakdown */}
                           <div className="mt-3 overflow-x-auto">

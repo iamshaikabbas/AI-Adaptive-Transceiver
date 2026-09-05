@@ -1,5 +1,14 @@
 import { useState, useEffect } from "react";
-import { api, type GraphEntry } from "../services/api";
+import { API_BASE } from "../services/api";
+
+interface GraphEntry {
+  graph_id: number;
+  title: string;
+  filename: string;
+  category: string;
+  description: string;
+  interpretation: string;
+}
 
 const CATEGORY_LABELS: Record<string, string> = {
   "01_system_overview": "System Overview",
@@ -20,8 +29,9 @@ export default function Analysis() {
   const [expanded, setExpanded] = useState<number | null>(null);
 
   useEffect(() => {
-    api.graphsIndex()
-      .then(setGraphs)
+    fetch(`${API_BASE}/api/graphs/index`)
+      .then((r) => r.json())
+      .then((data: GraphEntry[]) => setGraphs(data))
       .catch(() => {});
   }, []);
 
@@ -78,7 +88,7 @@ export default function Analysis() {
             >
               {expanded === g.graph_id ? (
                 <img
-                  src={api.graphFileUrl(g.filename)}
+                  src={`${API_BASE}/api/graphs/${g.filename}`}
                   alt={g.title}
                   className="w-full"
                   loading="lazy"
@@ -86,7 +96,7 @@ export default function Analysis() {
               ) : (
                 <div className="h-32 bg-surface-alt flex items-center justify-center">
                   <img
-                    src={api.graphFileUrl(g.filename)}
+                    src={`${API_BASE}/api/graphs/${g.filename}`}
                     alt={g.title}
                     className="max-h-full object-contain p-2"
                     loading="lazy"

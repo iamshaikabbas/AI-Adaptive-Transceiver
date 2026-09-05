@@ -10,7 +10,8 @@ export default function OracleComparison({ latest }: { latest: FrameResult | nul
     );
   }
 
-  const agree = latest.waveform === latest.oracle_waveform;
+  const hasWaveforms = !!latest.waveform && !!latest.oracle_waveform;
+  const agree = hasWaveforms && latest.waveform === latest.oracle_waveform;
 
   return (
     <div className="border border-border bg-surface p-3">
@@ -20,8 +21,8 @@ export default function OracleComparison({ latest }: { latest: FrameResult | nul
           {[
             ["Selected", latest.waveform],
             ["Oracle", latest.oracle_waveform],
-            ["Agreement", agree ? "YES" : "NO"],
-            ["ACS Regret", latest.ACS_regret.toFixed(4)],
+            ["Agreement", hasWaveforms ? (agree ? "YES" : "NO") : "—"],
+            ["ACS Regret", latest.ACS_regret != null && Number.isFinite(latest.ACS_regret) ? latest.ACS_regret.toFixed(4) : "—"],
           ].map(([label, value]) => (
             <tr key={label} className="border-b border-border-subtle last:border-b-0">
               <td className="py-1 text-text-muted">{label}</td>

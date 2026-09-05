@@ -18,10 +18,12 @@ function MiniChart({
   fmt?: (v: number) => string;
   highlight?: boolean;
 }) {
-  const chartData = data.map((f) => ({
-    frame: f.frame,
-    value: f[dataKey] as number,
-  }));
+  const chartData = data
+    .filter((f) => typeof f[dataKey] === "number" && Number.isFinite(f[dataKey] as number))
+    .map((f) => ({
+      frame: f.frame,
+      value: f[dataKey] as number,
+    }));
 
   const lastVal = chartData.length > 0 ? chartData[chartData.length - 1].value : null;
 

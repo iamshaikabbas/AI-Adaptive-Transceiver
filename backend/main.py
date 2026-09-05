@@ -437,8 +437,20 @@ async def evals_compare_runs(run_a: str, run_b: str):
     from .evals.report import compare_runs
     from .evals.schemas import EvalRunSummary
 
-    summary_a = EvalRunSummary(**data_a.get("summary", {}))
-    summary_b = EvalRunSummary(**data_b.get("summary", {}))
+    try:
+        summary_a = EvalRunSummary(**(data_a.get("summary") or {}))
+    except Exception:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Run {run_a} has no valid EvalRunSummary (legacy/incompatible format)",
+        )
+    try:
+        summary_b = EvalRunSummary(**(data_b.get("summary") or {}))
+    except Exception:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Run {run_b} has no valid EvalRunSummary (legacy/incompatible format)",
+        )
     report_a = data_a.get("report", {})
     report_b = data_b.get("report", {})
 

@@ -8,6 +8,13 @@ from typing import Any, Optional
 
 from pydantic import BaseModel, Field
 
+from .registry import get_active_model_version
+
+
+def _active_model_version() -> str:
+    """Resolve the active production model version (shared registry)."""
+    return get_active_model_version()
+
 
 # ---------------------------------------------------------------------------
 # Enums
@@ -134,7 +141,7 @@ class EvalCaseResult(BaseModel):
 
 class EvalRunConfig(BaseModel):
     suite: EvalSuite
-    model_version: str = "metric_models_v2"
+    model_version: str = Field(default_factory=_active_model_version)
     policy_version: str = "phase3"
     dataset_version: str = "phase6"
     random_seed: int = 42
@@ -159,7 +166,7 @@ class EvalRunSummary(BaseModel):
     current_case_id: Optional[str] = None
     current_case_type: Optional[CaseType] = None
     dataset_checksum: str = ""
-    model_version: str = "metric_models_v2"
+    model_version: str = Field(default_factory=_active_model_version)
     policy_version: str = "phase3"
 
 

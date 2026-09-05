@@ -20,6 +20,7 @@ import pandas as pd
 
 from .golden_dataset import GoldenDataset, get_golden_dataset
 from .metrics import compute_case_metrics
+from .registry import get_active_model_version, resolve_target_model
 from .schemas import (
     CaseResult,
     CaseType,
@@ -40,9 +41,7 @@ logger = logging.getLogger(__name__)
 _PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 _MATLAB_DIR = _PROJECT_ROOT / "OTFS MRC detection MATLAB code"
 _PIPELINE_DIR = _MATLAB_DIR / "otfs_ai_pipeline"
-_MODELS_DIR = _PIPELINE_DIR / "models"
-_V2_MODELS_DIR = _MODELS_DIR / "metric_models_v2"
-_V2_META_PATH = _V2_MODELS_DIR / "metric_models_v2_meta.json"
+_META_PATH = _PIPELINE_DIR / "models" / "metric_models_v2" / "metric_models_v2_meta.json"
 _CONFIG_PATH = _MATLAB_DIR / "adaptive_config_v2.json"
 
 _CARRIER_FREQ_HZ = 4_000_000_000.0
@@ -97,19 +96,25 @@ class EvalEngine:
         self._policy: dict = {}
         self._loaded = False
         self._domain: Optional[dict] = None
+        self.model_version: str = ""
 
     def _ensure_loaded(self):
         if self._loaded:
             return
         try:
             self._meta = {}
-            with open(_V2_META_PATH, encoding="utf-8") as f:
+            with open(_META_PATH, encoding="utf-8") as f:
                 import json
                 self._meta = json.load(f)
 
-            for target_name, target_info in self._meta["targets"].items():
-                model_path = _V2_MODELS_DIR / target_info["file"]
+            # Resolve every target artifact through the SHARED model registry
+            # (MODEL_VERSION, default v4-b1) — same resolution used by the
+            # production deployment / custom-evaluation path.
+            for target_name in self._meta["targets"]:
+                model_path = resolve_target_model(target_name)
                 self._models[target_name] = joblib.load(str(model_path))
+
+            self.model_version = get_active_model_version()
 
             self._policy = {
                 "objective": "ACS",

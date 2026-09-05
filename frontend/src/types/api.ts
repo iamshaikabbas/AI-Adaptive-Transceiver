@@ -21,8 +21,21 @@ export interface ConfigResponse {
 export interface ScenarioInfo {
   id: string;
   name: string;
+  environment: string | null;
+  description?: string | null;
+  duration_frames: number | null;
+  points?: ScenarioPoint[];
+}
+
+export interface ScenarioPoint {
+  t_s: number;
+  frame: number;
   environment: string;
-  duration_frames: number;
+  speed_kmph: number;
+  snr_db: number;
+  delay_profile: string;
+  doppler_scale: number;
+  modulation: number;
 }
 
 export interface SimulationStartRequest {
@@ -81,11 +94,11 @@ export interface FrameResult {
   strategy: string;
   switched: boolean;
   oracle_waveform: string;
-  BER: number;
-  throughput_bps: number;
-  CQI: number;
-  ACS: number;
-  ACS_regret: number;
+  BER: number | null;
+  throughput_bps: number | null;
+  CQI: number | null;
+  ACS: number | null;
+  ACS_regret: number | null;
   decision_correct: number;
   actual_BER_OTFS?: number;
   actual_ACS_OTFS?: number;
@@ -274,21 +287,32 @@ export interface EvalSuiteInfo {
 }
 
 export interface GoldenDatasetManifest {
-  total_rows: number;
-  total_columns: number;
+  name: string;
+  version: string;
+  source_path: string;
+  row_count: number;
+  column_count: number;
+  columns: string[];
   scenario_count: number;
-  frame_count: number;
-  checksum_md5: string;
-  checksum_verified: boolean;
-  expected_md5: string;
-  column_names: string[];
+  scenario_ids: string[];
+  strategies: string[];
   environments: string[];
   channel_profiles: string[];
-  speed_range: [number, number];
+  modulations: number[];
+  waveform_types: string[];
   snr_range: [number, number];
-  fixed_otfs_count: number;
-  fixed_oddm_count: number;
-  oracle_count: number;
+  speed_range: [number, number];
+  doppler_range: [number, number];
+  checksum_md5: string;
+  checksum_verified: boolean;
+  creation_timestamp: string | null;
+  policy_version: string;
+  provenance: string;
+  generation_source: string;
+  evaluation_eligible: boolean;
+  fixed_otfs_count?: number;
+  fixed_oddm_count?: number;
+  oracle_count?: number;
 }
 
 export interface EvalInputConditions {

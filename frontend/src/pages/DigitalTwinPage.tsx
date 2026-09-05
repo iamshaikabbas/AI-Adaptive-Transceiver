@@ -46,6 +46,10 @@ function EnvironmentPanel({ state }: { state: SimulationState2["simState"] }) {
   );
 }
 
+function fmtMetric(v: number | null | undefined, digits: number): string {
+  return v == null || !Number.isFinite(v) ? "—" : v.toFixed(digits);
+}
+
 function LiveMetrics({ latest }: { latest: FrameResult | null }) {
   if (!latest) {
     return (
@@ -62,10 +66,12 @@ function LiveMetrics({ latest }: { latest: FrameResult | null }) {
       <table className="w-full text-[12px]">
         <tbody>
           {[
-            ["BER", latest.BER.toFixed(6)],
-            ["Throughput", `${(latest.throughput_bps / 1000).toFixed(1)} kbps`],
-            ["CQI", `${latest.CQI}`],
-            ["ACS", latest.ACS.toFixed(4)],
+            ["BER", fmtMetric(latest.BER, 6)],
+            ["Throughput", latest.throughput_bps != null && Number.isFinite(latest.throughput_bps)
+              ? `${(latest.throughput_bps / 1000).toFixed(1)} kbps`
+              : "—"],
+            ["CQI", latest.CQI != null && Number.isFinite(latest.CQI) ? `${latest.CQI}` : "—"],
+            ["ACS", fmtMetric(latest.ACS, 4)],
             ["Waveform", latest.waveform],
             ["Oracle", latest.oracle_waveform],
           ].map(([label, value]) => (

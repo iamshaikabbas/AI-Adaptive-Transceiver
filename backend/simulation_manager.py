@@ -168,8 +168,13 @@ class SimulationManager:
             self.scenario = scen
             self.scenario_id = sid
             pts = scen.get("points", [])
+            if not pts:
+                raise ValueError(
+                    f"scenario {sid} has no points data: "
+                    "cannot start a simulation for an empty scenario"
+                )
             n_frames = req.duration_frames or len(pts)
-            self.total_frames = min(n_frames, len(pts)) if pts else n_frames
+            self.total_frames = min(n_frames, len(pts))
 
         self.scenario["name"] = self.scenario_id
         self.status = SimStatus.CREATED
@@ -489,13 +494,16 @@ class SimulationManager:
         last = self.frame_results[-1]
         ai = last.get("ai")
         if ai is not None:
+            predicted = ai.get("predicted_metrics") or {}
+            otfs_pred = predicted.get("OTFS") or {}
+            oddm_pred = predicted.get("ODDM") or {}
+            def _num(value):
+                return value if isinstance(value, (int, float)) and value == value else None
             return AIInfo(
                 selected_waveform=ai.get("recommendation"),
                 confidence=ai.get("confidence"),
-                predicted_otfs_acs=ai.get("predicted_ACS", {}).get("OTFS")
-                    if ai.get("predicted_ACS") else None,
-                predicted_oddm_acs=ai.get("predicted_ACS", {}).get("ODDM")
-                    if ai.get("predicted_ACS") else None,
+                predicted_otfs_acs=_num(otfs_pred.get("ACS")),
+                predicted_oddm_acs=_num(oddm_pred.get("ACS")),
                 reason=ai.get("reason"),
                 fallback_used=ai.get("fallback_used", False),
             )
